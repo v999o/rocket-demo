@@ -15,6 +15,8 @@ import java.util.Random;
 
 
 public class GameView extends View {
+
+    private final Bitmaps_boom bitmaps_boom = new Bitmaps_boom(getContext());
     private Rocket rocket;
     private SurvivalBoss survivalBoss;
     private Bullet_SurvivalBoss bullet_survivalBoss;
@@ -131,7 +133,7 @@ public class GameView extends View {
         AlienTriangle alienTriangle = new AlienTriangle(context);
         alienTriangle.setWidth(51);
         alienTriangle.setHeight(31);
-        alienTriangle.setX(random.nextInt(Constants.SCREEN_WIDTH- alienTriangle.getWidth()));
+        alienTriangle.setX(Math.abs(random.nextInt(Constants.SCREEN_WIDTH- alienTriangle.getWidth())));
         alienTriangle.setY(5);
         alienTriangle.setRect(alienTriangle.getX(), alienTriangle.getY(), alienTriangle.getWidth() + alienTriangle.getX(), alienTriangle.getHeight() + alienTriangle.getY());
         objects.add(alienTriangle);
@@ -143,7 +145,7 @@ public class GameView extends View {
         AlienUfo alienUfo = new AlienUfo(context);
         alienUfo.setWidth(80);
         alienUfo.setHeight(80);
-        alienUfo.setX(random.nextInt(Constants.SCREEN_WIDTH- alienUfo.getWidth()));
+        alienUfo.setX(Math.abs(random.nextInt(Constants.SCREEN_WIDTH- alienUfo.getWidth())));
         alienUfo.setY(5);
         alienUfo.setRect(alienUfo.getX(), alienUfo.getY(), alienUfo.getWidth() + alienUfo.getX(), alienUfo.getHeight() + alienUfo.getY());
         objects.add(alienUfo);
@@ -155,7 +157,7 @@ public class GameView extends View {
         AlienMeteor alienMeteor = new AlienMeteor(context);
         alienMeteor.setWidth(52);
         alienMeteor.setHeight(117);
-        alienMeteor.setX(random.nextInt(Constants.SCREEN_WIDTH- alienMeteor.getWidth()));
+        alienMeteor.setX(Math.abs(random.nextInt(Constants.SCREEN_WIDTH- alienMeteor.getWidth())));
         alienMeteor.setY(5);
         alienMeteor.setRect(alienMeteor.getX(), alienMeteor.getY(), alienMeteor.getWidth() + alienMeteor.getX(), alienMeteor.getHeight() + alienMeteor.getY());
         objects.add(alienMeteor);
@@ -167,7 +169,7 @@ public class GameView extends View {
         AlienBug alienBug = new AlienBug(context);
         alienBug.setWidth(52);
         alienBug.setHeight(117);
-        alienBug.setX(random.nextInt(Constants.SCREEN_WIDTH- alienBug.getWidth()));
+        alienBug.setX(Math.abs(random.nextInt(Constants.SCREEN_WIDTH- alienBug.getWidth())));
         alienBug.setY(5);
         alienBug.setRect(alienBug.getX(), alienBug.getY(), alienBug.getWidth() + alienBug.getX(), alienBug.getHeight() + alienBug.getY());
         objects.add(alienBug);
@@ -185,8 +187,8 @@ public class GameView extends View {
         bullets.add(rocketBullet);
     }
 
-    public void create_boom(Context context, int x, int y){
-        Boom boom = new Boom(context);
+    public void create_boom(int x, int y){
+        Boom boom = new Boom(bitmaps_boom);
         boom.setWidth(50);
         boom.setHeight(50);
         boom.setX(x);
@@ -280,7 +282,7 @@ public class GameView extends View {
                 } else {
                     for (int j = aliens.size() - 1; j >= 0; j--) {  //проходим по пришельцам чтобы удалить
                         if (bullets.get(i).getRect().intersect(aliens.get(j).getRect())) {
-                            create_boom(context, aliens.get(j).getX(), aliens.get(j).getY());
+                            create_boom(aliens.get(j).getX(), aliens.get(j).getY());
                             score += aliens.get(j).getSelf_score();
                             objects.remove(bullets.get(i));
                             objects.remove(aliens.get(j));
@@ -304,7 +306,6 @@ public class GameView extends View {
                 survival_boss_spawned = false;
                 isSurvival_boss_destroyed = true;
                 score += 20;
-                //MainActivity.txt_score.setText("" + score);
                 MainActivity.txt_score.setText(getResources().getString(R.string.text_score, score));
                 score_for_boss += 50;
                 default_boss_hp += 1;
@@ -317,7 +318,7 @@ public class GameView extends View {
             survival_boss_spawned = true;
             score_for_boss += 50;
             for (int i = aliens.size()-1; i >= 0; i--){
-                create_boom(context, aliens.get(i).getX(), aliens.get(i).getY());
+                create_boom(aliens.get(i).getX(), aliens.get(i).getY());
                 objects.remove(aliens.get(i));
                 aliens.remove(aliens.get(i));
             }
@@ -393,11 +394,10 @@ public class GameView extends View {
             editor.putInt(BEST_SCORE, bestscore);
             editor.apply();
         }
-        //MainActivity.txt_best_score.setText("best: " + bestscore);
+        MainActivity.btn_pause_s.setVisibility(INVISIBLE);
         MainActivity.txt_best_score.setText(getResources().getString(R.string.bestcore, bestscore));
         MainActivity.txt_score.setVisibility(INVISIBLE);
         MainActivity.rl_game_over.setVisibility(VISIBLE);
-
     }
 
     public void draw(Canvas canvas){
@@ -418,9 +418,18 @@ public class GameView extends View {
                 touchLeft = true;
             }
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
-            touchRight = false;
-            touchLeft = false;
+            performClick();
         }
+        return true;
+    }
+
+    @Override
+    public boolean performClick(){
+        super.performClick();
+
+        touchRight = false;
+        touchLeft = false;
+
         return true;
     }
 
@@ -442,7 +451,6 @@ public class GameView extends View {
         bullets.clear();
         bullets_survivalBoss.clear();
         objects.clear();
-        play = false;
         game_over = false;
         boss_survival = false;
         survival_boss_spawned = false;

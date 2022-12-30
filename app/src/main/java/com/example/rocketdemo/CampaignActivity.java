@@ -14,8 +14,8 @@ public class CampaignActivity extends AppCompatActivity {
 
     public static TextView txt_score_campaign, txt_game_over_score_c, txt_best_score_c, txt_level_complete, txt_game_over_c;
     public static Button btn_lvl1, btn_lvl2, btn_lvl3, btn_lvl4;
-    public ImageButton btn_to_menu, btn_restart_level, btn_next_level;
-    public static RelativeLayout rl_game_over_c;
+    public static ImageButton btn_to_menu, btn_restart_level, btn_next_level, btn_back, btn_pause, btn_resume;
+    public static RelativeLayout rl_game_over_c, rl_buttons;
     private CampaignView cv;
 
     @Override
@@ -38,7 +38,11 @@ public class CampaignActivity extends AppCompatActivity {
         btn_to_menu = findViewById(R.id.btn_to_menu);
         btn_restart_level = findViewById(R.id.btn_restart_level);
         btn_next_level = findViewById(R.id.btn_next_level);
+        btn_back = findViewById(R.id.btn_back);
+        btn_pause = findViewById(R.id.btn_pause);
+        btn_resume = findViewById(R.id.btn_resume);
         rl_game_over_c = findViewById(R.id.rl_game_over_c);
+        rl_buttons = findViewById(R.id.rl_buttons);
         txt_game_over_score_c = findViewById(R.id.txt_game_over_score_c);
         txt_best_score_c = findViewById(R.id.txt_best_score_c);
         txt_level_complete = findViewById(R.id.txt_level_complete);
@@ -49,61 +53,72 @@ public class CampaignActivity extends AppCompatActivity {
 
         txt_score_campaign.setVisibility(View.INVISIBLE);
 
+        btn_back.setOnClickListener(view -> CampaignActivity.this.finish());
+
         btn_lvl1.setOnClickListener(view -> {
-            txt_score_campaign.setVisibility(View.VISIBLE);
-            btn_lvl1.setVisibility(View.INVISIBLE);
-            btn_lvl2.setVisibility(View.INVISIBLE);
-            btn_lvl3.setVisibility(View.INVISIBLE);
-            btn_lvl4.setVisibility(View.INVISIBLE);
-            cv.setStart(true);
+            startCampaignLevel();
             cv.setLevel_number(1);
         });
 
         btn_lvl2.setOnClickListener(view -> {
-            txt_score_campaign.setVisibility(View.VISIBLE);
-            btn_lvl1.setVisibility(View.INVISIBLE);
-            btn_lvl2.setVisibility(View.INVISIBLE);
-            btn_lvl3.setVisibility(View.INVISIBLE);
-            btn_lvl4.setVisibility(View.INVISIBLE);
-            cv.setStart(true);
+            startCampaignLevel();
             cv.setLevel_number(2);
         });
 
         btn_lvl3.setOnClickListener(view -> {
-            txt_score_campaign.setVisibility(View.VISIBLE);
-            btn_lvl1.setVisibility(View.INVISIBLE);
-            btn_lvl2.setVisibility(View.INVISIBLE);
-            btn_lvl3.setVisibility(View.INVISIBLE);
-            btn_lvl4.setVisibility(View.INVISIBLE);
-            cv.setStart(true);
+            startCampaignLevel();
             cv.setLevel_number(3);
         });
 
         btn_lvl4.setOnClickListener(view -> {
-            txt_score_campaign.setVisibility(View.VISIBLE);
-            btn_lvl1.setVisibility(View.INVISIBLE);
-            btn_lvl2.setVisibility(View.INVISIBLE);
-            btn_lvl3.setVisibility(View.INVISIBLE);
-            btn_lvl4.setVisibility(View.INVISIBLE);
-            cv.setStart(true);
+            startCampaignLevel();
             cv.setLevel_number(4);
+        });
+
+        btn_pause.setOnClickListener(view -> {
+            cv.setStart(false);
+            btn_pause.setVisibility(View.INVISIBLE);
+            rl_buttons.setVisibility(View.VISIBLE);
+            btn_resume.setVisibility(View.VISIBLE);
+        });
+
+        btn_resume.setOnClickListener(view -> {
+            cv.setStart(true);
+            btn_pause.setVisibility(View.VISIBLE);
+            rl_buttons.setVisibility(View.INVISIBLE);
+            btn_resume.setVisibility(View.INVISIBLE);
         });
 
         btn_to_menu.setOnClickListener(view -> CampaignActivity.this.finish());
 
         btn_restart_level.setOnClickListener(view -> {
             rl_game_over_c.setVisibility(View.INVISIBLE);
+            rl_buttons.setVisibility(View.INVISIBLE);
+            btn_pause.setVisibility(View.VISIBLE);
+            btn_resume.setVisibility(View.INVISIBLE);
             cv.setStart(true);
             cv.reset();
         });
 
         btn_next_level.setOnClickListener(view -> {
             rl_game_over_c.setVisibility(View.INVISIBLE);
+            rl_buttons.setVisibility(View.INVISIBLE);
             cv.setStart(true);
             cv.reset();
             if (cv.getLevel_number() < 4) {
                 cv.setLevel_number(cv.getLevel_number() + 1);
             }
         });
+    }
+
+    public void startCampaignLevel() {
+        txt_score_campaign.setVisibility(View.VISIBLE);
+        btn_lvl1.setVisibility(View.INVISIBLE);
+        btn_lvl2.setVisibility(View.INVISIBLE);
+        btn_lvl3.setVisibility(View.INVISIBLE);
+        btn_lvl4.setVisibility(View.INVISIBLE);
+        btn_back.setVisibility(View.INVISIBLE);
+        btn_pause.setVisibility(View.VISIBLE);
+        cv.setStart(true);
     }
 }

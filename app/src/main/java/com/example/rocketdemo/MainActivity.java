@@ -9,14 +9,16 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     public static TextView txt_score, txt_best_score, txt_game_over_score, txt_choose_gamemode;
-    public static RelativeLayout rl_game_over;
-    public static Button btn_normal_survival, btn_boss_survival, btn_campaign, btn_to_menu;
+    public static RelativeLayout rl_game_over, rl_buttons_s;
+    public static Button btn_normal_survival, btn_boss_survival, btn_campaign;
+    public static ImageButton btn_to_menu_s, btn_restart_level_s, btn_pause_s, btn_resume_s;
     private GameView gv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,42 +43,80 @@ public class MainActivity extends AppCompatActivity {
         btn_normal_survival = findViewById(R.id.btn_normal_survival);
         btn_boss_survival = findViewById(R.id.btn_boss_survival);
         btn_campaign = findViewById(R.id.btn_campaign);
+        btn_to_menu_s = findViewById(R.id.btn_to_menu_s);
+        btn_restart_level_s = findViewById(R.id.btn_restart_level_s);
+        btn_pause_s = findViewById(R.id.btn_pause_s);
+        btn_resume_s = findViewById(R.id.btn_resume_s);
         rl_game_over = findViewById(R.id.rl_game_over);
+        rl_buttons_s = findViewById(R.id.rl_buttons_s);
         gv = findViewById(R.id.gv);
 
         txt_score.setVisibility(View.INVISIBLE);
 
         btn_normal_survival.setOnClickListener(view -> {
-            gv.setPlay(true);
+            startSurvival();
             gv.setBoss_survival(false);
-            txt_score.setVisibility(View.VISIBLE);
-            txt_choose_gamemode.setVisibility(View.INVISIBLE);
-            btn_normal_survival.setVisibility(View.INVISIBLE);
-            btn_boss_survival.setVisibility(View.INVISIBLE);
-            btn_campaign.setVisibility(View.INVISIBLE);
         });
         btn_boss_survival.setOnClickListener(view -> {
-            gv.setPlay(true);
+            startSurvival();
             gv.setBoss_survival(true);
-            txt_score.setVisibility(View.VISIBLE);
-            txt_choose_gamemode.setVisibility(View.INVISIBLE);
-            btn_normal_survival.setVisibility(View.INVISIBLE);
-            btn_boss_survival.setVisibility(View.INVISIBLE);
-            btn_campaign.setVisibility(View.INVISIBLE);
         });
         rl_game_over.setOnClickListener(view -> {
-            rl_game_over.setVisibility(View.INVISIBLE);
-            txt_choose_gamemode.setVisibility(View.VISIBLE);
-            btn_normal_survival.setVisibility(View.VISIBLE);
-            btn_boss_survival.setVisibility(View.VISIBLE);
-            btn_campaign.setVisibility(View.VISIBLE);
-            Context context = rl_game_over.getContext();
-            gv.setPlay(false);
-            gv.reset(context);
+            toMainMenu();
         });
         btn_campaign.setOnClickListener(view -> {
             Intent intent = new Intent(this, CampaignActivity.class);
             startActivity(intent);
         });
+
+        btn_pause_s.setOnClickListener(view -> {
+            gv.setPlay(false);
+            btn_pause_s.setVisibility(View.INVISIBLE);
+            btn_resume_s.setVisibility(View.VISIBLE);
+            rl_buttons_s.setVisibility(View.VISIBLE);
+        });
+
+        btn_resume_s.setOnClickListener(view -> {
+            gv.setPlay(true);
+            btn_pause_s.setVisibility(View.VISIBLE);
+            btn_resume_s.setVisibility(View.INVISIBLE);
+            rl_buttons_s.setVisibility(View.INVISIBLE);
+        });
+
+        btn_to_menu_s.setOnClickListener(view -> {
+            toMainMenu();
+            btn_resume_s.setVisibility(View.INVISIBLE);
+            rl_buttons_s.setVisibility(View.INVISIBLE);
+        });
+
+        btn_restart_level_s.setOnClickListener(view -> {
+            gv.setPlay(true);
+            btn_pause_s.setVisibility(View.VISIBLE);
+            btn_resume_s.setVisibility(View.INVISIBLE);
+            rl_buttons_s.setVisibility(View.INVISIBLE);
+            Context context = rl_game_over.getContext();
+            gv.reset(context);
+        });
+    }
+
+    public void startSurvival(){
+        gv.setPlay(true);
+        txt_score.setVisibility(View.VISIBLE);
+        txt_choose_gamemode.setVisibility(View.INVISIBLE);
+        btn_normal_survival.setVisibility(View.INVISIBLE);
+        btn_boss_survival.setVisibility(View.INVISIBLE);
+        btn_campaign.setVisibility(View.INVISIBLE);
+        btn_pause_s.setVisibility(View.VISIBLE);
+    }
+
+    public void toMainMenu(){
+        rl_game_over.setVisibility(View.INVISIBLE);
+        txt_choose_gamemode.setVisibility(View.VISIBLE);
+        btn_normal_survival.setVisibility(View.VISIBLE);
+        btn_boss_survival.setVisibility(View.VISIBLE);
+        btn_campaign.setVisibility(View.VISIBLE);
+        Context context = rl_game_over.getContext();
+        gv.setPlay(false);
+        gv.reset(context);
     }
 }

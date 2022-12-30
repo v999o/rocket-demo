@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 
 public class CampaignView extends View {
 
-    public TextView testText;
+    private final Bitmaps_boom bitmaps_boom = new Bitmaps_boom(getContext());
     private Rocket rocket;
     private TriangleBoss triangleBoss;
     private UfoBoss ufoBoss;
@@ -141,15 +140,21 @@ public class CampaignView extends View {
         //MainActivity.txt_best_score.setText("best: " + bestscore);
         CampaignActivity.txt_score_campaign.setVisibility(INVISIBLE);
         CampaignActivity.rl_game_over_c.setVisibility(VISIBLE);
-        testText.setVisibility(VISIBLE);
+        CampaignActivity.rl_buttons.setVisibility(VISIBLE);
+        CampaignActivity.txt_level_complete.setVisibility(INVISIBLE);
+        CampaignActivity.txt_game_over_c.setVisibility(VISIBLE);
+        CampaignActivity.btn_pause.setVisibility(INVISIBLE);
     }
 
     public void show_level_complete(){
         CampaignActivity.txt_game_over_score_c.setText(CampaignActivity.txt_score_campaign.getText());
         CampaignActivity.txt_score_campaign.setVisibility(INVISIBLE);
         CampaignActivity.rl_game_over_c.setVisibility(VISIBLE);
+        CampaignActivity.rl_buttons.setVisibility(VISIBLE);
         CampaignActivity.txt_level_complete.setVisibility(VISIBLE);
         CampaignActivity.txt_game_over_c.setVisibility(INVISIBLE);
+        CampaignActivity.btn_next_level.setVisibility(VISIBLE);
+        CampaignActivity.btn_pause.setVisibility(INVISIBLE);
     }
 
     public void create_aliens_triangle(Context context, int i){
@@ -217,8 +222,8 @@ public class CampaignView extends View {
         bullets.add(rocketBullet);
     }
 
-    public void create_boom(Context context, int x, int y){
-        Boom boom = new Boom(context);
+    public void create_boom(int x, int y){
+        Boom boom = new Boom(bitmaps_boom);
         boom.setWidth(50);
         boom.setHeight(50);
         boom.setX(x);
@@ -401,7 +406,7 @@ public class CampaignView extends View {
                 } else {
                     for (int j = aliens.size() - 1; j >= 0; j--) {  //проходим по пришельцам чтобы удалить
                         if (bullets.get(i).getRect().intersect(aliens.get(j).getRect())) {
-                            create_boom(context, aliens.get(j).getX(), aliens.get(j).getY());
+                            create_boom(aliens.get(j).getX(), aliens.get(j).getY());
                             score += aliens.get(j).getSelf_score();
                             objects.remove(bullets.get(i));
                             objects.remove(aliens.get(j));
@@ -652,9 +657,18 @@ public class CampaignView extends View {
                 touchLeft = true;
             }
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
-            touchRight = false;
-            touchLeft = false;
+            performClick();
         }
+        return true;
+    }
+
+    @Override
+    public boolean performClick(){
+        super.performClick();
+
+        touchRight = false;
+        touchLeft = false;
+
         return true;
     }
 

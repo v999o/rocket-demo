@@ -23,4 +23,7 @@
     <string name="img_btn_next_level">next level vector icon</string>
     <string name="text_score"> %1$d</string>
     <string name="bestcore">best: %1$d</string>
+    <string name="img_btn_back">back icon</string>
+    <string name="img_btn_pause">pause image</string>
+    <string name="img_btn_resume_image">resume image</string>
 </resources>
