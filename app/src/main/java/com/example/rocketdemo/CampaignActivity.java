@@ -51,6 +51,7 @@ public class CampaignActivity extends AppCompatActivity {
 
         cv = findViewById(R.id.cv);
 
+        MainActivity.txt_loading.setVisibility(View.INVISIBLE);
         txt_score_campaign.setVisibility(View.INVISIBLE);
 
         btn_back.setOnClickListener(view -> CampaignActivity.this.finish());

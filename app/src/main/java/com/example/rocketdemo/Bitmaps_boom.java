@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 public class Bitmaps_boom {
-    private Bitmap[] bitmaps;
+    private final Bitmap[] bitmaps;
 
     public Bitmaps_boom(Context context){
         bitmaps = new Bitmap[5];

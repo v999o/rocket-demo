@@ -15,6 +15,15 @@ import java.util.ArrayList;
 public class CampaignView extends View {
 
     private final Bitmaps_boom bitmaps_boom = new Bitmaps_boom(getContext());
+    private final Bitmaps_triangleBoss bitmaps_triangleBoss = new Bitmaps_triangleBoss(getContext());
+    private final Bitmaps_ufoBoss bitmaps_ufoBoss = new Bitmaps_ufoBoss(getContext());
+    private final Bitmaps_bugBoss bitmaps_bugBoss = new Bitmaps_bugBoss(getContext());
+    private final Bitmaps_meteorBoss bitmaps_meteorBoss = new Bitmaps_meteorBoss(getContext());
+    private final Bitmaps_boom_triangleBoss bitmaps_boom_triangleBoss = new Bitmaps_boom_triangleBoss(getContext());
+    private final Bitmaps_boom_ufoBoss bitmaps_boom_ufoBoss = new Bitmaps_boom_ufoBoss(getContext());
+    private final Bitmaps_boom_bugBoss bitmaps_boom_bugBoss = new Bitmaps_boom_bugBoss(getContext());
+    private final Bitmaps_boom_meteorBoss bitmaps_boom_meteorBoss = new Bitmaps_boom_meteorBoss(getContext());
+
     private Rocket rocket;
     private TriangleBoss triangleBoss;
     private UfoBoss ufoBoss;
@@ -86,21 +95,21 @@ public class CampaignView extends View {
                             if (!isBossBoomAnimationPlaying) {
                                 switch (level_number) {
                                     case 1:
-                                        handle_Boss(context, triangleBoss);
+                                        handle_Boss(triangleBoss);
                                         handle_boss_bullet(context, triangleBoss);
                                         break;
                                     case 2:
-                                        handle_Boss(context, ufoBoss);
+                                        handle_Boss(ufoBoss);
                                         handle_boss_bullet(context, ufoBoss);
                                         break;
                                     case 3:
-                                        handle_Boss(context, bugBoss);
+                                        handle_Boss(bugBoss);
                                         handle_boss_bullet(context, bugBoss);
                                         break;
                                 }
                             }
                         } else if (!isAllMeteorBossesDestroyed){
-                            handle_Boss(context, meteorBoss);
+                            handle_Boss(meteorBoss);
                             handle_boss_bullet(context, meteorBoss);
                         }
                     }
@@ -244,8 +253,8 @@ public class CampaignView extends View {
         isRocket_boom_created = true;
     }
 
-    public void create_triangleBoss(Context context){
-        triangleBoss = new TriangleBoss(context);
+    public void create_triangleBoss(){
+        triangleBoss = new TriangleBoss(bitmaps_triangleBoss);
         triangleBoss.setWidth(100);
         triangleBoss.setHeight(166);
         triangleBoss.setX(Constants.SCREEN_WIDTH/2-triangleBoss.getWidth()/2);
@@ -254,8 +263,8 @@ public class CampaignView extends View {
         objects.add(triangleBoss);
     }
 
-    public void create_ufoBoss(Context context){
-        ufoBoss = new UfoBoss(context);
+    public void create_ufoBoss(){
+        ufoBoss = new UfoBoss(bitmaps_ufoBoss);
         ufoBoss.setWidth(400);
         ufoBoss.setHeight(110);
         ufoBoss.setX(Constants.SCREEN_WIDTH/2-ufoBoss.getWidth()/2);
@@ -264,8 +273,8 @@ public class CampaignView extends View {
         objects.add(ufoBoss);
     }
 
-    public void create_bugBoss(Context context){
-        bugBoss = new BugBoss(context);
+    public void create_bugBoss(){
+        bugBoss = new BugBoss(bitmaps_bugBoss);
         bugBoss.setWidth(300);
         bugBoss.setHeight(500);
         bugBoss.setX(Constants.SCREEN_WIDTH/2-bugBoss.getWidth()/2);
@@ -274,8 +283,8 @@ public class CampaignView extends View {
         objects.add(bugBoss);
     }
 
-    public void create_meteorBoss(Context context, int x, int stop_height){
-        meteorBoss = new MeteorBoss(context, stop_height);
+    public void create_meteorBoss(int x, int stop_height){
+        meteorBoss = new MeteorBoss(stop_height, bitmaps_meteorBoss);
         meteorBoss.setWidth(52);
         meteorBoss.setHeight(117);
         meteorBoss.setX(x);
@@ -329,8 +338,8 @@ public class CampaignView extends View {
         bullets_boss.add(bullet_meteorBoss);
     }
 
-    public void create_boom_triangleBoss(Context context, int x, int y){
-        boom_triangleBoss = new Boom_triangleBoss(context);
+    public void create_boom_triangleBoss(int x, int y){
+        boom_triangleBoss = new Boom_triangleBoss(bitmaps_boom_triangleBoss);
         boom_triangleBoss.setWidth(200);
         boom_triangleBoss.setHeight(126);
         boom_triangleBoss.setX(x);
@@ -338,8 +347,8 @@ public class CampaignView extends View {
         objects.add(boom_triangleBoss);
     }
 
-    public void create_boom_ufoBoss(Context context, int x, int y){
-        boom_ufoBoss = new Boom_ufoBoss(context);
+    public void create_boom_ufoBoss(int x, int y){
+        boom_ufoBoss = new Boom_ufoBoss(bitmaps_boom_ufoBoss);
         boom_ufoBoss.setWidth(700);
         boom_ufoBoss.setHeight(110);
         boom_ufoBoss.setX(x);
@@ -347,8 +356,8 @@ public class CampaignView extends View {
         objects.add(boom_ufoBoss);
     }
 
-    public void create_boom_bugBoss(Context context, int x, int y){
-        boom_bugBoss = new Boom_bugBoss(context);
+    public void create_boom_bugBoss(int x, int y){
+        boom_bugBoss = new Boom_bugBoss(bitmaps_boom_bugBoss);
         boom_bugBoss.setWidth(500);
         boom_bugBoss.setHeight(700);
         boom_bugBoss.setX(x);
@@ -356,8 +365,8 @@ public class CampaignView extends View {
         objects.add(boom_bugBoss);
     }
 
-    public void create_boom_meteorBoss(Context context, int x, int y){
-        boom_meteorBoss = new Boom_meteorBoss(context);
+    public void create_boom_meteorBoss(int x, int y){
+        boom_meteorBoss = new Boom_meteorBoss(bitmaps_boom_meteorBoss);
         boom_meteorBoss.setWidth(152);
         boom_meteorBoss.setHeight(217);
         boom_meteorBoss.setX(x);
@@ -466,23 +475,23 @@ public class CampaignView extends View {
         }
     }
 
-    public void handle_Boss(Context context, Boss boss){
+    public void handle_Boss(Boss boss){
         if (!isBossSpawned && !isLevelComplete){
             switch (level_number){
                 case 1:
-                    create_triangleBoss(context);
+                    create_triangleBoss();
                     break;
                 case 2:
-                    create_ufoBoss(context);
+                    create_ufoBoss();
                     break;
                 case 3:
-                    create_bugBoss(context);
+                    create_bugBoss();
                     break;
                 case 4:
-                    create_meteorBoss(context, 0, 250);
-                    create_meteorBoss(context, Constants.SCREEN_WIDTH-52, 400);
-                    create_meteorBoss(context, Constants.SCREEN_WIDTH/4, 550);
-                    create_meteorBoss(context, (Constants.SCREEN_WIDTH/4)*2, 700);
+                    create_meteorBoss(0, 250);
+                    create_meteorBoss(Constants.SCREEN_WIDTH-52, 400);
+                    create_meteorBoss(Constants.SCREEN_WIDTH/4, 550);
+                    create_meteorBoss((Constants.SCREEN_WIDTH/4)*2, 700);
                     break;
             }
             isBossSpawned = true;
@@ -492,7 +501,7 @@ public class CampaignView extends View {
                     if (meteorBosses.get(i).getHp() > 0) {
                         meteorBosses.get(i).update();
                     } else if (!isLevelComplete){
-                        create_boom_meteorBoss(context, meteorBosses.get(i).getX()-50, meteorBosses.get(i).getY()-50);
+                        create_boom_meteorBoss(meteorBosses.get(i).getX()-50, meteorBosses.get(i).getY()-50);
                         isBossBoomAnimationPlaying = true;
                         objects.remove(meteorBosses.get(i));
                         meteorBosses.remove(meteorBosses.get(i));
@@ -508,13 +517,13 @@ public class CampaignView extends View {
             } else if (!isLevelComplete) {
                 switch (level_number){
                     case 1:
-                        create_boom_triangleBoss(context, triangleBoss.getX()-50, triangleBoss.getY()-67);
+                        create_boom_triangleBoss(triangleBoss.getX()-50, triangleBoss.getY()-67);
                         break;
                     case 2:
-                        create_boom_ufoBoss(context, ufoBoss.getX()-150, ufoBoss.getY());
+                        create_boom_ufoBoss(ufoBoss.getX()-150, ufoBoss.getY());
                         break;
                     case 3:
-                        create_boom_bugBoss(context, bugBoss.getX()-100, bugBoss.getY()-100);
+                        create_boom_bugBoss(bugBoss.getX()-100, bugBoss.getY()-100);
                         break;
                 }
                 isBossSpawned = false;

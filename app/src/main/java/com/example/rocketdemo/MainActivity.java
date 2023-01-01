@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static TextView txt_score, txt_best_score, txt_game_over_score, txt_choose_gamemode;
+    public static TextView txt_score, txt_best_score, txt_game_over_score, txt_choose_gamemode, txt_loading;
     public static RelativeLayout rl_game_over, rl_buttons_s;
     public static Button btn_normal_survival, btn_boss_survival, btn_campaign;
     public static ImageButton btn_to_menu_s, btn_restart_level_s, btn_pause_s, btn_resume_s;
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         txt_best_score = findViewById(R.id.txt_best_score);
         txt_game_over_score = findViewById(R.id.txt_game_over_score);
         txt_choose_gamemode = findViewById(R.id.txt_choose_gamemode);
+        txt_loading = findViewById(R.id.txt_loading);
         btn_normal_survival = findViewById(R.id.btn_normal_survival);
         btn_boss_survival = findViewById(R.id.btn_boss_survival);
         btn_campaign = findViewById(R.id.btn_campaign);
@@ -61,10 +62,10 @@ public class MainActivity extends AppCompatActivity {
             startSurvival();
             gv.setBoss_survival(true);
         });
-        rl_game_over.setOnClickListener(view -> {
-            toMainMenu();
-        });
+        rl_game_over.setOnClickListener(view -> toMainMenu());
+
         btn_campaign.setOnClickListener(view -> {
+            txt_loading.setVisibility(View.VISIBLE);
             Intent intent = new Intent(this, CampaignActivity.class);
             startActivity(intent);
         });
