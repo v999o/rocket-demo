@@ -4,26 +4,27 @@
     <string name="level2">2\n level</string>
     <string name="level3">3\n level</string>
     <string name="level4">4\n level</string>
-    <string name="txt_score_campaign_default_text">0</string>
+    <string name="txt_score_campaign_default_text" translatable="false">0</string>
     <string name="txt_level_complete">LEVEL COMPLETE</string>
     <string name="txt_game_over_c">GAME OVER</string>
-    <string name="txt_game_over_score_c_default_text">0</string>
+    <string name="txt_game_over_score_c_default_text" translatable="false">0</string>
     <string name="txt_best_score_c_default_text">best: 0</string>
-    <string name="txt_score">0</string>
+    <string name="txt_score" translatable="false">0</string>
     <string name="txt_choose_gamemode">Choose gamemode</string>
     <string name="btn_normal_survival">normal survival</string>
     <string name="btn_boss_survival">boss survival</string>
     <string name="btn_campaign">campaign</string>
     <string name="txt_game_over">Game over</string>
-    <string name="txt_game_over_score_default_text">0</string>
+    <string name="txt_game_over_score_default_text" translatable="false">0</string>
     <string name="txt_best_score_default_text">best: 0</string>
     <string name="txt_touch_screen_to_continue">Touch screen to continue</string>
     <string name="img_btn_to_menu_content_description">menu vector icon</string>
     <string name="img_btn_restart_level">restart vector icon</string>
-    <string name="img_btn_next_level">next level vector icon</string>
-    <string name="text_score"> %1$d</string>
+    <string name="img_btn_next_level" translatable="false">next level vector icon</string>
+    <string name="text_score" translatable="false"> %1$d</string>
     <string name="bestcore">best: %1$d</string>
     <string name="img_btn_back">back icon</string>
     <string name="img_btn_pause">pause image</string>
     <string name="img_btn_resume_image">resume image</string>
+    <string name="txt_loading">LOADING…</string>
 </resources>

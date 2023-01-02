@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">rocket demo</string>
+    <string name="level1"> 1 уровень </string>
+    <string name="level2"> 2 уровень </string>
+    <string name="level3"> 3 уровень </string>
+    <string name="level4"> 4 уровень </string>
+    <string name="txt_level_complete">УРОВЕНЬ ПРОЙДЕН!</string>
+    <string name="txt_game_over_c">ИГРА ОКОНЧЕНА</string>
+    <string name="txt_best_score_c_default_text">рекорд: 0</string>
+    <string name="txt_choose_gamemode">Выберите режим игры</string>
+    <string name="btn_normal_survival"> стандартное выживание </string>
+    <string name="btn_boss_survival"> выживание с боссом </string>
+    <string name="btn_campaign"> кампания </string>
+    <string name="txt_game_over">ИГРА ОКОНЧЕНА</string>
+    <string name="txt_best_score_default_text">рекорд: 0</string>
+    <string name="txt_touch_screen_to_continue">Нажмите на экран для продолжения</string>
+    <string name="img_btn_to_menu_content_description">кнопка меню</string>
+    <string name="img_btn_restart_level">кнопка рестарт</string>
+    <string name="img_btn_next_level">кнопка следующий уровень</string>
+    <string name="bestcore">рекорд: %1$d</string>
+    <string name="img_btn_back">кнопка назад</string>
+    <string name="img_btn_pause">кнопка пауза</string>
+    <string name="img_btn_resume_image">кнопка продолжить</string>
+    <string name="txt_loading">ЗАГРУЗКА…</string>
+</resources>
