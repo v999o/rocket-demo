@@ -3,7 +3,8 @@ package com.example.rocketdemo;
 public class BoomBoss extends GameObject{
     private int life;
 
-    public BoomBoss(int life){
+    public BoomBoss(int life, int x, int y, int w, int h){
+        super(x, y, w, h);
         this.life = life;
     }
 

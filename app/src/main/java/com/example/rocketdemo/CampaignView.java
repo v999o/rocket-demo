@@ -74,68 +74,71 @@ public class CampaignView extends View {
                     create_rocket(context);
                     isRocketSpawned = true;
                 } else if (start) {
-                    handle_rocket();
-                    handle_aliens(context);
-                    switch (level_number){
-                        case 1:
-                            handle_rocket_bullet(context, triangleBoss);
-                            break;
-                        case 2:
-                            handle_rocket_bullet(context, ufoBoss);
-                            break;
-                        case 3:
-                            handle_rocket_bullet(context, bugBoss);
-                            break;
-                        case 4:
-                            handle_rocket_bullet(context, meteorBoss);
-                            break;
-                    }
-                    if (aliens.size() == 0){
-                        if (level_number != 4) {
-                            if (!isBossBoomAnimationPlaying) {
-                                switch (level_number) {
-                                    case 1:
-                                        handle_Boss(triangleBoss);
-                                        handle_boss_bullet(context, triangleBoss);
-                                        break;
-                                    case 2:
-                                        handle_Boss(ufoBoss);
-                                        handle_boss_bullet(context, ufoBoss);
-                                        break;
-                                    case 3:
-                                        handle_Boss(bugBoss);
-                                        handle_boss_bullet(context, bugBoss);
-                                        break;
-                                }
-                            }
-                        } else if (!isAllMeteorBossesDestroyed){
-                            handle_Boss(meteorBoss);
-                            handle_boss_bullet(context, meteorBoss);
-                        }
-                    }
-                    if (isBossBoomAnimationPlaying && !isLevelComplete){
-                        switch (level_number){
-                            case 1:
-                                handle_boom_boss(boom_triangleBoss);
-                                break;
-                            case 2:
-                                handle_boom_boss(boom_ufoBoss);
-                                break;
-                            case 3:
-                                handle_boom_boss(boom_bugBoss);
-                                break;
-                            case 4:
-                                handle_boom_boss(boom_meteorBoss);
-                                break;
-                        }
-                    }
-                    handle_booms();
+                    onStart(context);
                 }
             }
             invalidate();
         };
     }
 
+    public void onStart(Context context){
+        handle_rocket();
+        handle_aliens(context);
+        switch (level_number){
+            case 1:
+                handle_rocket_bullet(context, triangleBoss);
+                break;
+            case 2:
+                handle_rocket_bullet(context, ufoBoss);
+                break;
+            case 3:
+                handle_rocket_bullet(context, bugBoss);
+                break;
+            case 4:
+                handle_rocket_bullet(context, meteorBoss);
+                break;
+        }
+        if (aliens.size() == 0){
+            if (level_number != 4) {
+                if (!isBossBoomAnimationPlaying) {
+                    switch (level_number) {
+                        case 1:
+                            handle_Boss(triangleBoss);
+                            handle_boss_bullet(context, triangleBoss);
+                            break;
+                        case 2:
+                            handle_Boss(ufoBoss);
+                            handle_boss_bullet(context, ufoBoss);
+                            break;
+                        case 3:
+                            handle_Boss(bugBoss);
+                            handle_boss_bullet(context, bugBoss);
+                            break;
+                    }
+                }
+            } else if (!isAllMeteorBossesDestroyed){
+                handle_Boss(meteorBoss);
+                handle_boss_bullet(context, meteorBoss);
+            }
+        }
+        if (isBossBoomAnimationPlaying && !isLevelComplete){
+            switch (level_number){
+                case 1:
+                    handle_boom_boss(boom_triangleBoss);
+                    break;
+                case 2:
+                    handle_boom_boss(boom_ufoBoss);
+                    break;
+                case 3:
+                    handle_boom_boss(boom_bugBoss);
+                    break;
+                case 4:
+                    handle_boom_boss(boom_meteorBoss);
+                    break;
+            }
+        }
+        handle_booms();
+    }
 
     public void show_game_over(){
         CampaignActivity.txt_game_over_score_c.setText(CampaignActivity.txt_score_campaign.getText());
@@ -167,87 +170,48 @@ public class CampaignView extends View {
     }
 
     public void create_aliens_triangle(Context context, int i){
-        AlienTriangle alienTriangle = new AlienTriangle(context);
-        alienTriangle.setWidth(51);
-        alienTriangle.setHeight(31);
-        alienTriangle.setX(coordinates.AlienX[i]*coordinates.getW());
-        alienTriangle.setY(coordinates.AlienYTest[i]*coordinates.ht);
-        alienTriangle.setRect(alienTriangle.getX(), alienTriangle.getY(), alienTriangle.getWidth() + alienTriangle.getX(), alienTriangle.getHeight() + alienTriangle.getY());
+        AlienTriangle alienTriangle = new AlienTriangle(context, coordinates.AlienX[i]*coordinates.getW(), coordinates.AlienYTest[i]*coordinates.ht);
         objects.add(alienTriangle);
         aliens.add(alienTriangle);
     }
 
     public void create_aliens_ufo(Context context, int i){
-        AlienUfo alienUfo = new AlienUfo(context);
-        alienUfo.setWidth(80);
-        alienUfo.setHeight(80);
-        alienUfo.setX(coordinates.AlienX2[i]*coordinates.getW());
-        alienUfo.setY(coordinates.AlienYTest[i]*coordinates.hu);
-        alienUfo.setRect(alienUfo.getX(), alienUfo.getY(), alienUfo.getWidth() + alienUfo.getX(), alienUfo.getHeight() + alienUfo.getY());
+        AlienUfo alienUfo = new AlienUfo(context, coordinates.AlienX2[i]*coordinates.getW(), coordinates.AlienYTest[i]*coordinates.hu);
         objects.add(alienUfo);
         aliens.add(alienUfo);
     }
 
     public void create_aliens_bug(Context context, int i){
-        AlienBug alienBug = new AlienBug(context);
-        alienBug.setWidth(39);
-        alienBug.setHeight(90);
-        alienBug.setX(coordinates.AlienX3[i]*coordinates.getW());
-        alienBug.setY(coordinates.AlienYTest[i]*coordinates.hb);
-        alienBug.setRect(alienBug.getX(), alienBug.getY(), alienBug.getWidth() + alienBug.getX(), alienBug.getHeight() + alienBug.getY());
+        AlienBug alienBug = new AlienBug(context, coordinates.AlienX3[i]*coordinates.getW(), coordinates.AlienYTest[i]*coordinates.hb);
         objects.add(alienBug);
         aliens.add(alienBug);
     }
 
     public void create_aliens_meteor(Context context, int i){
-        AlienMeteor alienMeteor = new AlienMeteor(context);
-        alienMeteor.setWidth(52);
-        alienMeteor.setHeight(117);
-        alienMeteor.setX(coordinates.AlienX4[i]*coordinates.getW());
-        alienMeteor.setY(coordinates.AlienYTest[i]*coordinates.hm);
-        alienMeteor.setRect(alienMeteor.getX(), alienMeteor.getY(), alienMeteor.getWidth() + alienMeteor.getX(), alienMeteor.getHeight() + alienMeteor.getY());
+        AlienMeteor alienMeteor = new AlienMeteor(context, coordinates.AlienX4[i]*coordinates.getW(), coordinates.AlienYTest[i]*coordinates.hm);
         objects.add(alienMeteor);
         aliens.add(alienMeteor);
     }
 
     public void create_rocket(Context context){
-        rocket = new Rocket(context);
-        rocket.setWidth(34);
-        rocket.setHeight(85);
-        rocket.setX(Constants.SCREEN_WIDTH/2-rocket.getWidth()/2);
-        rocket.setY(Constants.SCREEN_HEIGHT-100);
-        rocket.setRect(rocket.getX(), rocket.getY(), rocket.getWidth() + rocket.getX(), rocket.getHeight() + rocket.getY());
+        rocket = new Rocket(context, Constants.SCREEN_WIDTH/2 - 34/2, Constants.SCREEN_HEIGHT-100);
         objects.add(rocket);
     }
 
     public void create_rocket_bullet(Context context){
-        Bullet_rocket rocketBullet = new Bullet_rocket(context);
-        rocketBullet.setWidth(10);
-        rocketBullet.setHeight(10);
-        rocketBullet.setX(rocket.getX()+rocket.getWidth()/2);
-        rocketBullet.setY(rocket.getY());
-        rocketBullet.setRect(rocketBullet.getX(), rocketBullet.getY(), rocketBullet.getWidth() + rocketBullet.getX(), rocketBullet.getHeight() + rocketBullet.getY());
+        Bullet_rocket rocketBullet = new Bullet_rocket(context, rocket.getX()+rocket.getWidth()/2, rocket.getY());
         objects.add(rocketBullet);
         bullets.add(rocketBullet);
     }
 
     public void create_boom(int x, int y){
-        Boom boom = new Boom(bitmaps_boom);
-        boom.setWidth(50);
-        boom.setHeight(50);
-        boom.setX(x);
-        boom.setY(y);
+        Boom boom = new Boom(bitmaps_boom, x, y);
         objects.add(boom);
         booms.add(boom);
     }
 
     public void create_rocket_boom(Context context){
-        rocket_boom = new Rocket_boom(context);
-        rocket_boom.setWidth(85);
-        rocket_boom.setHeight(85);
-        rocket_boom.setX(rocket.getX()-27);
-        rocket_boom.setY(rocket.getY());
-        rocket_boom.setRect(rocket_boom.getX(), rocket_boom.getY(), rocket_boom.getWidth() + rocket_boom.getX(), rocket_boom.getHeight() + rocket_boom.getY());
+        rocket_boom = new Rocket_boom(context, rocket.getX()-27, rocket.getY());
         objects.add(rocket_boom);
         objects.remove(rocket);
         isRocket_boom_created = true;
@@ -255,122 +219,66 @@ public class CampaignView extends View {
 
     public void create_triangleBoss(){
         triangleBoss = new TriangleBoss(bitmaps_triangleBoss);
-        triangleBoss.setWidth(100);
-        triangleBoss.setHeight(166);
-        triangleBoss.setX(Constants.SCREEN_WIDTH/2-triangleBoss.getWidth()/2);
-        triangleBoss.setY(-166);
-        triangleBoss.setRect(triangleBoss.getX(), triangleBoss.getY(), triangleBoss.getWidth() + triangleBoss.getX(), triangleBoss.getHeight() + triangleBoss.getY());
         objects.add(triangleBoss);
     }
 
     public void create_ufoBoss(){
         ufoBoss = new UfoBoss(bitmaps_ufoBoss);
-        ufoBoss.setWidth(400);
-        ufoBoss.setHeight(110);
-        ufoBoss.setX(Constants.SCREEN_WIDTH/2-ufoBoss.getWidth()/2);
-        ufoBoss.setY(-110);
-        ufoBoss.setRect(ufoBoss.getX(), ufoBoss.getY(), ufoBoss.getWidth() + ufoBoss.getX(), ufoBoss.getHeight() + ufoBoss.getY());
         objects.add(ufoBoss);
     }
 
     public void create_bugBoss(){
         bugBoss = new BugBoss(bitmaps_bugBoss);
-        bugBoss.setWidth(300);
-        bugBoss.setHeight(500);
-        bugBoss.setX(Constants.SCREEN_WIDTH/2-bugBoss.getWidth()/2);
-        bugBoss.setY(-500);
-        bugBoss.setRect(bugBoss.getX(), bugBoss.getY(), bugBoss.getWidth() + bugBoss.getX(), bugBoss.getHeight() + bugBoss.getY());
         objects.add(bugBoss);
     }
 
     public void create_meteorBoss(int x, int stop_height){
-        meteorBoss = new MeteorBoss(stop_height, bitmaps_meteorBoss);
-        meteorBoss.setWidth(52);
-        meteorBoss.setHeight(117);
-        meteorBoss.setX(x);
-        meteorBoss.setY(-117);
-        meteorBoss.setRect(meteorBoss.getX(), meteorBoss.getY(), meteorBoss.getWidth() + meteorBoss.getX(), meteorBoss.getHeight() + meteorBoss.getY());
+        meteorBoss = new MeteorBoss(stop_height, bitmaps_meteorBoss, x);
         objects.add(meteorBoss);
         meteorBosses.add(meteorBoss);
     }
 
     public void create_triangleBoss_bullet(Context context){
-        Bullet_triangleBoss bullet_triangleBoss = new Bullet_triangleBoss(context);
-        bullet_triangleBoss.setWidth(10);
-        bullet_triangleBoss.setHeight(10);
-        bullet_triangleBoss.setX(triangleBoss.getX()+triangleBoss.getWidth()/2);
-        bullet_triangleBoss.setY(triangleBoss.getY()+triangleBoss.getHeight());
-        bullet_triangleBoss.setRect(bullet_triangleBoss.getX(), bullet_triangleBoss.getY(), bullet_triangleBoss.getWidth() + bullet_triangleBoss.getX(), bullet_triangleBoss.getHeight() + bullet_triangleBoss.getY());
+        Bullet_triangleBoss bullet_triangleBoss = new Bullet_triangleBoss(context, triangleBoss.getX()+triangleBoss.getWidth()/2, triangleBoss.getY()+triangleBoss.getHeight());
         objects.add(bullet_triangleBoss);
         bullets_boss.add(bullet_triangleBoss);
     }
 
     public void create_ufoBoss_bullet(Context context, int x){
-        Bullet_UfoBoss bullet_ufoBoss = new Bullet_UfoBoss(context);
-        bullet_ufoBoss.setWidth(10);
-        bullet_ufoBoss.setHeight(10);
-        bullet_ufoBoss.setX(x);
-        bullet_ufoBoss.setY(ufoBoss.getY()+ufoBoss.getHeight());
-        bullet_ufoBoss.setRect(bullet_ufoBoss.getX(), bullet_ufoBoss.getY(), bullet_ufoBoss.getWidth() + bullet_ufoBoss.getX(), bullet_ufoBoss.getHeight() + bullet_ufoBoss.getY());
+        Bullet_UfoBoss bullet_ufoBoss = new Bullet_UfoBoss(context, x, ufoBoss.getY()+ufoBoss.getHeight());
         objects.add(bullet_ufoBoss);
         bullets_boss.add(bullet_ufoBoss);
     }
 
     public void create_bugBoss_bullet(Context context, int x, int y){
-        Bullet_BugBoss bullet_bugBoss = new Bullet_BugBoss(context);
-        bullet_bugBoss.setWidth(10);
-        bullet_bugBoss.setHeight(10);
-        bullet_bugBoss.setX(x);
-        bullet_bugBoss.setY(y);
-        bullet_bugBoss.setRect(bullet_bugBoss.getX(), bullet_bugBoss.getY(), bullet_bugBoss.getWidth() + bullet_bugBoss.getX(), bullet_bugBoss.getHeight() + bullet_bugBoss.getY());
+        Bullet_BugBoss bullet_bugBoss = new Bullet_BugBoss(context, x, y);
         objects.add(bullet_bugBoss);
         bullets_boss.add(bullet_bugBoss);
     }
 
     public void create_meteorBoss_bullet(Context context, MeteorBoss meteorBoss){
-        Bullet_MeteorBoss bullet_meteorBoss = new Bullet_MeteorBoss(context);
-        bullet_meteorBoss.setWidth(10);
-        bullet_meteorBoss.setHeight(10);
-        bullet_meteorBoss.setX(meteorBoss.getX()+meteorBoss.getWidth()/2-5);
-        bullet_meteorBoss.setY(meteorBoss.getY()+meteorBoss.getHeight());
-        bullet_meteorBoss.setRect(bullet_meteorBoss.getX(), bullet_meteorBoss.getY(), bullet_meteorBoss.getWidth() + bullet_meteorBoss.getX(), bullet_meteorBoss.getWidth() + bullet_meteorBoss.getY());
+        Bullet_MeteorBoss bullet_meteorBoss = new Bullet_MeteorBoss(context, meteorBoss.getX()+meteorBoss.getWidth()/2-5, meteorBoss.getY()+meteorBoss.getHeight());
         objects.add(bullet_meteorBoss);
         bullets_boss.add(bullet_meteorBoss);
     }
 
     public void create_boom_triangleBoss(int x, int y){
-        boom_triangleBoss = new Boom_triangleBoss(bitmaps_boom_triangleBoss);
-        boom_triangleBoss.setWidth(200);
-        boom_triangleBoss.setHeight(126);
-        boom_triangleBoss.setX(x);
-        boom_triangleBoss.setY(y);
+        boom_triangleBoss = new Boom_triangleBoss(bitmaps_boom_triangleBoss, x, y);
         objects.add(boom_triangleBoss);
     }
 
     public void create_boom_ufoBoss(int x, int y){
-        boom_ufoBoss = new Boom_ufoBoss(bitmaps_boom_ufoBoss);
-        boom_ufoBoss.setWidth(700);
-        boom_ufoBoss.setHeight(110);
-        boom_ufoBoss.setX(x);
-        boom_ufoBoss.setY(y);
+        boom_ufoBoss = new Boom_ufoBoss(bitmaps_boom_ufoBoss, x, y);
         objects.add(boom_ufoBoss);
     }
 
     public void create_boom_bugBoss(int x, int y){
-        boom_bugBoss = new Boom_bugBoss(bitmaps_boom_bugBoss);
-        boom_bugBoss.setWidth(500);
-        boom_bugBoss.setHeight(700);
-        boom_bugBoss.setX(x);
-        boom_bugBoss.setY(y);
+        boom_bugBoss = new Boom_bugBoss(bitmaps_boom_bugBoss, x, y);
         objects.add(boom_bugBoss);
     }
 
     public void create_boom_meteorBoss(int x, int y){
-        boom_meteorBoss = new Boom_meteorBoss(bitmaps_boom_meteorBoss);
-        boom_meteorBoss.setWidth(152);
-        boom_meteorBoss.setHeight(217);
-        boom_meteorBoss.setX(x);
-        boom_meteorBoss.setY(y);
+        boom_meteorBoss = new Boom_meteorBoss(bitmaps_boom_meteorBoss, x, y);
         objects.add(boom_meteorBoss);
         boom_meteorBosses.add(boom_meteorBoss);
     }

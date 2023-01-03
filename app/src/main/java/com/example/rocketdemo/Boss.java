@@ -11,7 +11,8 @@ public class Boss extends GameObject {
     private final int boss_bullet_delay_next;
     private final int stop_height;
 
-    public Boss(int hp, int boss_bullet_delay_next, int stop_height){
+    public Boss(int hp, int boss_bullet_delay_next, int stop_height, int x, int y, int w, int h){
+        super(x, y, w, h);
         this.stop_height = stop_height;
         this.hp = hp;
         this.default_hp = hp;

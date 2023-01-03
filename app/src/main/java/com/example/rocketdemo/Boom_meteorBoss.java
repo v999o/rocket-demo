@@ -6,8 +6,8 @@ public class Boom_meteorBoss extends BoomBoss{
 
     private final Bitmaps_boom_meteorBoss bitmaps_boom_meteorBoss;
 
-    public Boom_meteorBoss(Bitmaps_boom_meteorBoss bitmaps_boom_meteorBoss){
-        super(40);
+    public Boom_meteorBoss(Bitmaps_boom_meteorBoss bitmaps_boom_meteorBoss, int x, int y){
+        super(40, x, y, 152, 217);
         this.bitmaps_boom_meteorBoss = bitmaps_boom_meteorBoss;
     }
 

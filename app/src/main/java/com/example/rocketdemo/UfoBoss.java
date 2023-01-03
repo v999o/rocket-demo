@@ -7,7 +7,7 @@ public class UfoBoss extends Boss{
     private final Bitmaps_ufoBoss bitmaps_ufoBoss;
 
     public UfoBoss(Bitmaps_ufoBoss bitmaps_ufoBoss) {
-        super(10, 50, 300);
+        super(10, 50, 300, Constants.SCREEN_WIDTH/2-400/2, -110, 400, 110);
         this.bitmaps_ufoBoss = bitmaps_ufoBoss;
 
     }

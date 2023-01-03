@@ -7,7 +7,7 @@ public class TriangleBoss extends Boss{
     private final Bitmaps_triangleBoss bitmaps_triangleBoss;
 
     public TriangleBoss(Bitmaps_triangleBoss bitmaps_triangleBoss) {
-        super(5, 50, 300);
+        super(5, 50, 300, Constants.SCREEN_WIDTH/2-100/2, -166, 100, 166);
         this.bitmaps_triangleBoss = bitmaps_triangleBoss;
     }
 

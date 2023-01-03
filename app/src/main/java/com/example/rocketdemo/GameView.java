@@ -84,22 +84,12 @@ public class GameView extends View {
     }
 
     public void create_rocket(Context context){
-        rocket = new Rocket(context);
-        rocket.setWidth(34);
-        rocket.setHeight(85);
-        rocket.setX(Constants.SCREEN_WIDTH/2-rocket.getWidth()/2);
-        rocket.setY(Constants.SCREEN_HEIGHT-100);
-        rocket.setRect(rocket.getX(), rocket.getY(), rocket.getWidth() + rocket.getX(), rocket.getHeight() + rocket.getY());
+        rocket = new Rocket(context, Constants.SCREEN_WIDTH/2-this.getWidth()/2, Constants.SCREEN_HEIGHT-100);
         objects.add(rocket);
     }
 
     public void create_rocket_boom(Context context){
-        rocket_boom = new Rocket_boom(context);
-        rocket_boom.setWidth(85);
-        rocket_boom.setHeight(85);
-        rocket_boom.setX(rocket.getX()-27);
-        rocket_boom.setY(rocket.getY());
-        rocket_boom.setRect(rocket_boom.getX(), rocket_boom.getY(), rocket_boom.getWidth() + rocket_boom.getX(), rocket_boom.getHeight() + rocket_boom.getY());
+        rocket_boom = new Rocket_boom(context, rocket.getX()-27, rocket.getY());
         objects.add(rocket_boom);
         objects.remove(rocket);
         isRocket_boom_created = true;
@@ -130,99 +120,56 @@ public class GameView extends View {
 
     public void create_alienTriangle(Context context){
         Random random = new Random();
-        AlienTriangle alienTriangle = new AlienTriangle(context);
-        alienTriangle.setWidth(51);
-        alienTriangle.setHeight(31);
-        alienTriangle.setX(Math.abs(random.nextInt(Constants.SCREEN_WIDTH- alienTriangle.getWidth())));
-        alienTriangle.setY(5);
-        alienTriangle.setRect(alienTriangle.getX(), alienTriangle.getY(), alienTriangle.getWidth() + alienTriangle.getX(), alienTriangle.getHeight() + alienTriangle.getY());
+        AlienTriangle alienTriangle = new AlienTriangle(context, random.nextInt(Constants.SCREEN_WIDTH- this.getWidth()), 5);
         objects.add(alienTriangle);
         aliens.add(alienTriangle);
     }
 
     public void create_alienUfo(Context context){
         Random random = new Random();
-        AlienUfo alienUfo = new AlienUfo(context);
-        alienUfo.setWidth(80);
-        alienUfo.setHeight(80);
-        alienUfo.setX(Math.abs(random.nextInt(Constants.SCREEN_WIDTH- alienUfo.getWidth())));
-        alienUfo.setY(5);
-        alienUfo.setRect(alienUfo.getX(), alienUfo.getY(), alienUfo.getWidth() + alienUfo.getX(), alienUfo.getHeight() + alienUfo.getY());
+        AlienUfo alienUfo = new AlienUfo(context, random.nextInt(Constants.SCREEN_WIDTH- this.getWidth()), 5);
         objects.add(alienUfo);
         aliens.add(alienUfo);
     }
 
     public void create_alienMeteor(Context context){
         Random random = new Random();
-        AlienMeteor alienMeteor = new AlienMeteor(context);
-        alienMeteor.setWidth(52);
-        alienMeteor.setHeight(117);
-        alienMeteor.setX(Math.abs(random.nextInt(Constants.SCREEN_WIDTH- alienMeteor.getWidth())));
-        alienMeteor.setY(5);
-        alienMeteor.setRect(alienMeteor.getX(), alienMeteor.getY(), alienMeteor.getWidth() + alienMeteor.getX(), alienMeteor.getHeight() + alienMeteor.getY());
+        AlienMeteor alienMeteor = new AlienMeteor(context, random.nextInt(Constants.SCREEN_WIDTH- this.getWidth()), 5);
         objects.add(alienMeteor);
         aliens.add(alienMeteor);
     }
 
     public void create_alienBug(Context context){
         Random random = new Random();
-        AlienBug alienBug = new AlienBug(context);
-        alienBug.setWidth(52);
-        alienBug.setHeight(117);
-        alienBug.setX(Math.abs(random.nextInt(Constants.SCREEN_WIDTH- alienBug.getWidth())));
-        alienBug.setY(5);
-        alienBug.setRect(alienBug.getX(), alienBug.getY(), alienBug.getWidth() + alienBug.getX(), alienBug.getHeight() + alienBug.getY());
+        AlienBug alienBug = new AlienBug(context, random.nextInt(Constants.SCREEN_WIDTH- this.getWidth()), 5);
         objects.add(alienBug);
         aliens.add(alienBug);
     }
 
     public void create_rocket_bullet(Context context){
-        Bullet_rocket rocketBullet = new Bullet_rocket(context);
-        rocketBullet.setWidth(10);
-        rocketBullet.setHeight(10);
-        rocketBullet.setX(rocket.getX()+rocket.getWidth()/2);
-        rocketBullet.setY(rocket.getY());
-        rocketBullet.setRect(rocketBullet.getX(), rocketBullet.getY(), rocketBullet.getWidth() + rocketBullet.getX(), rocketBullet.getHeight() + rocketBullet.getY());
+        Bullet_rocket rocketBullet = new Bullet_rocket(context, rocket.getX()+rocket.getWidth()/2, rocket.getY());
         objects.add(rocketBullet);
         bullets.add(rocketBullet);
     }
 
     public void create_boom(int x, int y){
-        Boom boom = new Boom(bitmaps_boom);
-        boom.setWidth(50);
-        boom.setHeight(50);
-        boom.setX(x);
-        boom.setY(y);
+        Boom boom = new Boom(bitmaps_boom, x, y);
         objects.add(boom);
         booms.add(boom);
     }
 
     public void create_boom_survivalBoss(Context context, int x, int y){
-        boom_survivalBoss = new Boom_survivalBoss(context);
-        boom_survivalBoss.setWidth(200);
-        boom_survivalBoss.setHeight(126);
-        boom_survivalBoss.setX(x);
-        boom_survivalBoss.setY(y);
+        boom_survivalBoss = new Boom_survivalBoss(context, x, y);
         objects.add(boom_survivalBoss);
     }
 
     public void createSurvivalBoss(Context context){
         survivalBoss = new SurvivalBoss(context, default_boss_hp, survival_boss_bullet_delay_next);
-        survivalBoss.setWidth(149);
-        survivalBoss.setHeight(126);
-        survivalBoss.setX(Constants.SCREEN_WIDTH/2-survivalBoss.getWidth()/2);
-        survivalBoss.setY(-126);
-        survivalBoss.setRect(survivalBoss.getX(), survivalBoss.getY(), survivalBoss.getWidth() + survivalBoss.getX(), survivalBoss.getHeight() + survivalBoss.getY());
         objects.add(survivalBoss);
     }
 
     public void create_survivalBoss_bullet(Context context){
-        bullet_survivalBoss = new Bullet_SurvivalBoss(context);
-        bullet_survivalBoss.setWidth(10);
-        bullet_survivalBoss.setHeight(10);
-        bullet_survivalBoss.setX(survivalBoss.getX()+survivalBoss.getWidth()/2);
-        bullet_survivalBoss.setY(survivalBoss.getY()+survivalBoss.getHeight());
-        bullet_survivalBoss.setRect(bullet_survivalBoss.getX(), bullet_survivalBoss.getY(), bullet_survivalBoss.getWidth() + bullet_survivalBoss.getX(), bullet_survivalBoss.getHeight() + bullet_survivalBoss.getY());
+        bullet_survivalBoss = new Bullet_SurvivalBoss(context, survivalBoss.getX()+survivalBoss.getWidth()/2, survivalBoss.getY()+survivalBoss.getHeight());
         objects.add(bullet_survivalBoss);
         bullets_survivalBoss.add(bullet_survivalBoss);
     }

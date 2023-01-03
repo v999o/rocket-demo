@@ -17,7 +17,8 @@ public class Rocket_boom extends GameObject{
     private final Bitmap bitmap7;
     private final Bitmap bitmap8;
 
-    public Rocket_boom(Context context){
+    public Rocket_boom(Context context, int x, int y){
+        super(x, y, 85, 85);
         this.bitmap1 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.rocket_boom1), 85, 85, false);
         this.bitmap2 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.rocket_boom2), 85, 85, false);
         this.bitmap3 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.rocket_boom3), 85, 85, false);

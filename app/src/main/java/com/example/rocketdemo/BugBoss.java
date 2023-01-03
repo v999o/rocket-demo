@@ -11,7 +11,7 @@ public class BugBoss extends Boss{
     private int which_cannon_will_shoot = 3;
 
     public BugBoss(Bitmaps_bugBoss bitmaps_bugBoss){
-        super(15, 50, 300);
+        super(15, 50, 300, Constants.SCREEN_WIDTH/2-300/2, -500, 300, 500);
         this.bitmaps_bugBoss = bitmaps_bugBoss;
     }
 

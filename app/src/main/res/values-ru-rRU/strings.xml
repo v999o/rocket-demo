@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">rocket demo</string>
-    <string name="level1"> 1 уровень </string>
-    <string name="level2"> 2 уровень </string>
-    <string name="level3"> 3 уровень </string>
-    <string name="level4"> 4 уровень </string>
+    <string name="level1">"   1 уровень   "</string>
+    <string name="level2">"   2 уровень   "</string>
+    <string name="level3">"   3 уровень   "</string>
+    <string name="level4">"   4 уровень   "</string>
     <string name="txt_level_complete">УРОВЕНЬ ПРОЙДЕН!</string>
     <string name="txt_game_over_c">ИГРА ОКОНЧЕНА</string>
     <string name="txt_best_score_c_default_text">рекорд: 0</string>

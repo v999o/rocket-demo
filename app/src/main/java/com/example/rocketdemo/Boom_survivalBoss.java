@@ -18,7 +18,8 @@ public class Boom_survivalBoss extends GameObject{
     private final Bitmap bitmap8;
     private final Bitmap bitmap9;
 
-    public Boom_survivalBoss(Context context){
+    public Boom_survivalBoss(Context context, int x, int y){
+        super(x, y, 200, 126);
         this.bitmap1 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.boss_survival_destroyed1), 200, 126, false);
         this.bitmap2 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.boss_survival_destroyed2), 200, 126, false);
         this.bitmap3 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.boss_survival_destroyed3), 200, 126, false);

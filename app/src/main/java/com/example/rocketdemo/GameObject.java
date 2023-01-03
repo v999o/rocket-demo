@@ -78,8 +78,4 @@ public class GameObject {
     public Rect getRect() {
         return new Rect(this.x, this.y, this.x+this.width, this.y+this.height);
     }
-
-    public void setRect(int left, int top, int right, int bottom) {
-        this.rect = new Rect(left, top, right, bottom);
-    }
 }

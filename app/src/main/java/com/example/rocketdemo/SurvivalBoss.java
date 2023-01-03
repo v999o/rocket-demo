@@ -27,7 +27,7 @@ public class SurvivalBoss extends Alien{
     private final Bitmap bitmap_damage5;
 
     public SurvivalBoss(Context context, int default_hp, int boss_bullet_delay_next) {
-        super(10, 20);
+        super(10, 20, Constants.SCREEN_WIDTH/2-149/2, -126, 149, 126);
         this.bitmap1 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.boss_survival_rot1), 149, 126, false);
         this.bitmap2 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.boss_survival_rot2), 149, 126, false);
         this.bitmap3 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.boss_survival_rot3), 149, 126, false);

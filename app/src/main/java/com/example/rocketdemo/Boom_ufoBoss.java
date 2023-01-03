@@ -6,8 +6,8 @@ public class Boom_ufoBoss extends BoomBoss{
 
     private final Bitmaps_boom_ufoBoss bitmaps_boom_ufoBoss;
 
-    public Boom_ufoBoss(Bitmaps_boom_ufoBoss bitmaps_boom_ufoBoss){
-        super(55);
+    public Boom_ufoBoss(Bitmaps_boom_ufoBoss bitmaps_boom_ufoBoss, int x, int y){
+        super(55, x, y, 700, 110);
         this.bitmaps_boom_ufoBoss = bitmaps_boom_ufoBoss;
     }
 

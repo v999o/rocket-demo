@@ -3,7 +3,7 @@ package com.example.rocketdemo;
 public final class Coordinates {
     private final int w = Constants.SCREEN_WIDTH/10;
 
-    public final int ht = -50;
+    public final int ht = -70;
     public int[] AlienX = {4, 3, 2, 3, 6, 4, 0, 1, 4, 6,
             2, 3, 7, 0, 9, 8, 1, 0, 7, 5,
             2, 4, 6, 3, 9, 4, 2, 7, 1, 4,
@@ -21,7 +21,7 @@ public final class Coordinates {
             4, 5, 7, 1, 3, 6, 8, 0, 2, 4,
             5, 7, 9};
 
-    public final int hb = -70;
+    public final int hb = -60;
     public int[] AlienX3 = {0, 5, 0, 8, 2, 6, 9, 5, 4, 5,
             7, 3, 7, 1, 6, 2, 8, 9, 0, 7,
             5, 7, 3, 6, 9, 0, 5, 1, 2, 9,
@@ -30,7 +30,7 @@ public final class Coordinates {
             4, 5, 7, 1, 3, 6, 8, 0, 2, 4,
             5, 7, 9};
 
-    public final int hm = -80;
+    public final int hm = -60;
     public int[] AlienX4 = {0, 3, 4, 9, 6, 2, 3, 2, 0, 5,
             9, 8, 3, 5, 6, 1, 2, 8, 6, 2,
             1, 5, 3, 8, 2, 0, 6, 4, 7, 9,

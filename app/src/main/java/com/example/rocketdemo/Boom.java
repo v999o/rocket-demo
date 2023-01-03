@@ -7,7 +7,8 @@ public class Boom extends GameObject{
     private int life = 25;
     private final Bitmaps_boom bitmaps_boom;
 
-    public Boom(Bitmaps_boom bitmaps_boom) {
+    public Boom(Bitmaps_boom bitmaps_boom, int x, int y) {
+        super(x, y, 50, 50);
         this.bitmaps_boom = bitmaps_boom;
     }
 
