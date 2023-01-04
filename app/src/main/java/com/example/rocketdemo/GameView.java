@@ -120,28 +120,28 @@ public class GameView extends View {
 
     public void create_alienTriangle(Context context){
         Random random = new Random();
-        AlienTriangle alienTriangle = new AlienTriangle(context, random.nextInt(Constants.SCREEN_WIDTH- this.getWidth()), 5);
+        AlienTriangle alienTriangle = new AlienTriangle(context, random.nextInt(Constants.SCREEN_WIDTH-51), 5);
         objects.add(alienTriangle);
         aliens.add(alienTriangle);
     }
 
     public void create_alienUfo(Context context){
         Random random = new Random();
-        AlienUfo alienUfo = new AlienUfo(context, random.nextInt(Constants.SCREEN_WIDTH- this.getWidth()), 5);
+        AlienUfo alienUfo = new AlienUfo(context, random.nextInt(Constants.SCREEN_WIDTH-80), 5);
         objects.add(alienUfo);
         aliens.add(alienUfo);
     }
 
     public void create_alienMeteor(Context context){
         Random random = new Random();
-        AlienMeteor alienMeteor = new AlienMeteor(context, random.nextInt(Constants.SCREEN_WIDTH- this.getWidth()), 5);
+        AlienMeteor alienMeteor = new AlienMeteor(context, random.nextInt(Constants.SCREEN_WIDTH-52), 5);
         objects.add(alienMeteor);
         aliens.add(alienMeteor);
     }
 
     public void create_alienBug(Context context){
         Random random = new Random();
-        AlienBug alienBug = new AlienBug(context, random.nextInt(Constants.SCREEN_WIDTH- this.getWidth()), 5);
+        AlienBug alienBug = new AlienBug(context, random.nextInt(Constants.SCREEN_WIDTH-39), 5);
         objects.add(alienBug);
         aliens.add(alienBug);
     }
