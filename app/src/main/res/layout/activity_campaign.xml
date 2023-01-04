@@ -24,7 +24,7 @@
         android:layout_above="@+id/btn_lvl2"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
-        android:background="@drawable/buttons_style"
+        android:background="@drawable/button"
         android:text="@string/level1"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
@@ -36,7 +36,7 @@
         android:layout_above="@+id/btn_lvl3"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="25dp"
-        android:background="@drawable/buttons_style"
+        android:background="@drawable/button"
         android:text="@string/level2"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
@@ -53,7 +53,7 @@
         android:layout_below="@+id/centerInParentBase"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:background="@drawable/buttons_style"
+        android:background="@drawable/button"
         android:text="@string/level3"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
@@ -65,7 +65,7 @@
         android:layout_below="@+id/btn_lvl3"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:background="@drawable/buttons_style"
+        android:background="@drawable/button"
         android:text="@string/level4"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
@@ -100,48 +100,53 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/img_btn_resume_image" />
+
     <RelativeLayout
         android:id="@+id/rl_game_over_c"
-        android:visibility="invisible"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+
         <TextView
             android:id="@+id/txt_level_complete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_level_complete"
-            android:textSize="40sp"
-            android:layout_marginTop="200dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="200dp"
+            android:text="@string/txt_level_complete"
             android:textColor="#FFFFFF"
-            android:visibility="invisible"/>
+            android:textSize="40sp"
+            android:visibility="invisible" />
+
         <TextView
             android:id="@+id/txt_game_over_c"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_game_over_c"
-            android:textSize="40sp"
-            android:layout_marginTop="200dp"
             android:layout_centerHorizontal="true"
-            android:textColor="#FFFFFF"/>
+            android:layout_marginTop="200dp"
+            android:text="@string/txt_game_over_c"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp" />
+
         <TextView
             android:id="@+id/txt_game_over_score_c"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_score_campaign_default_text"
-            android:textSize="100sp"
             android:layout_below="@+id/txt_game_over_c"
-            android:textColor="#FFFFFF"
+            android:layout_centerInParent="true"
             android:layout_marginTop="50dp"
-            android:layout_centerInParent="true"/>
+            android:text="@string/txt_score_campaign_default_text"
+            android:textColor="#FFFFFF"
+            android:textSize="100sp" />
+
         <TextView
             android:id="@+id/txt_best_score_c"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_best_score_c_default_text"
-            android:layout_centerHorizontal="true"
             android:layout_below="@+id/txt_game_over_score_c"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
+            android:text="@string/txt_best_score_c_default_text"
             android:textSize="20sp" />
     </RelativeLayout>
     <RelativeLayout
