@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class CampaignActivity extends AppCompatActivity {
 
     public TextView txt_level_complete, txt_game_over_c;
-    public static TextView txt_game_over_score_c, txt_best_score_c, txt_score_campaign;
+    public TextView txt_game_over_score_c, txt_best_score_c, txt_score_campaign;
     public Button btn_lvl1, btn_lvl2, btn_lvl3, btn_lvl4;
     public ImageButton btn_to_menu, btn_restart_level, btn_next_level, btn_back, btn_pause, btn_resume;
     public RelativeLayout rl_game_over_c, rl_buttons;
@@ -52,7 +52,6 @@ public class CampaignActivity extends AppCompatActivity {
 
         cv = findViewById(R.id.cv);
 
-        MainActivity.txt_loading.setVisibility(View.INVISIBLE);
         txt_score_campaign.setVisibility(View.INVISIBLE);
 
         btn_back.setOnClickListener(view -> CampaignActivity.this.finish());
@@ -125,5 +124,17 @@ public class CampaignActivity extends AppCompatActivity {
         btn_back.setVisibility(View.INVISIBLE);
         btn_pause.setVisibility(View.VISIBLE);
         cv.setStart(true);
+    }
+
+    public void set_txt_best_score_c_text(String string){
+        txt_best_score_c.setText(string);
+    }
+
+    public void set_txt_score_campaign_text(String string){
+        txt_score_campaign.setText(string);
+    }
+
+    public void set_txt_game_over_score_c_text(){
+        txt_game_over_score_c.setText(txt_score_campaign.getText());
     }
 }

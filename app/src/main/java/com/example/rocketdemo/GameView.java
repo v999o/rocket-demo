@@ -241,7 +241,7 @@ public class GameView extends View {
                             objects.remove(aliens.get(j));
                             bullets.remove(bullets.get(i));
                             aliens.remove(aliens.get(j));
-                            ((MainActivity)getContext()).set_txt_score_text(getResources().getString(R.string.text_score, score));
+                            ((MainActivity)this.context).set_txt_score_text(getResources().getString(R.string.text_score, score));
                             //MainActivity.txt_score.setText(getResources().getString(R.string.text_score, score));
                             break;
                         }
@@ -259,7 +259,7 @@ public class GameView extends View {
                 survival_boss_spawned = false;
                 isSurvival_boss_destroyed = true;
                 score += 20;
-                ((MainActivity)getContext()).set_txt_score_text(getResources().getString(R.string.text_score, score));
+                ((MainActivity)context).set_txt_score_text(getResources().getString(R.string.text_score, score));
                 //MainActivity.txt_score.setText(getResources().getString(R.string.text_score, score));
                 score_for_boss += 50;
                 default_boss_hp += 1;
@@ -340,7 +340,7 @@ public class GameView extends View {
     }
 
     public void show_game_over(){
-        ((MainActivity)context).set_txt_game_over_score_text(((MainActivity)context).get_txt_score_text().toString());
+        ((MainActivity)context).set_txt_game_over_score_text();
         //MainActivity.txt_game_over_score.setText(((MainActivity)getContext()).get_txt_score_text());
         if (bestscore < score) {
             bestscore = score;
@@ -399,7 +399,7 @@ public class GameView extends View {
     }
 
     public void reset(Context context) {
-        ((MainActivity)getContext()).set_txt_score_text("0");
+        ((MainActivity)this.context).set_txt_score_text("0");
         //MainActivity.txt_score.setText("0");
         score = 0;
         score_for_boss = 50;

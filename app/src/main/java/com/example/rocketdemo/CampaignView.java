@@ -25,6 +25,7 @@ public class CampaignView extends View {
     private final Bitmaps_boom_bugBoss bitmaps_boom_bugBoss = new Bitmaps_boom_bugBoss(getContext());
     private final Bitmaps_boom_meteorBoss bitmaps_boom_meteorBoss = new Bitmaps_boom_meteorBoss(getContext());
 
+    private final Context context;
     private Rocket rocket;
     private TriangleBoss triangleBoss;
     private UfoBoss ufoBoss;
@@ -71,6 +72,7 @@ public class CampaignView extends View {
 
     public CampaignView(Context context, @Nullable AttributeSet attrs){
         super(context, attrs);
+        this.context = context;
 
         SharedPreferences sp = context.getSharedPreferences(GAME_SETTINGS, Context.MODE_PRIVATE);
         if(sp != null){
@@ -167,11 +169,13 @@ public class CampaignView extends View {
             editor.putInt(BEST_SCORE, bestscore);
             editor.apply();
         }
-        CampaignActivity.txt_best_score_c.setText(getResources().getString(R.string.bestcore, bestscore));
+        ((CampaignActivity)context).set_txt_best_score_c_text(getResources().getString(R.string.bestcore, bestscore));
+        //CampaignActivity.txt_best_score_c.setText(getResources().getString(R.string.bestcore, bestscore));
     }
 
     public void show_game_over(){
-        CampaignActivity.txt_game_over_score_c.setText(CampaignActivity.txt_score_campaign.getText());
+        ((CampaignActivity)context).set_txt_game_over_score_c_text();
+        //CampaignActivity.txt_game_over_score_c.setText(CampaignActivity.txt_score_campaign.getText());
         switch (level_number){
             case 1:
                 save_bestscore(bestscore1, BEST_SCORE1);
@@ -210,7 +214,8 @@ public class CampaignView extends View {
                 save_bestscore(bestscore4, BEST_SCORE4);
                 break;
         }
-        CampaignActivity.txt_game_over_score_c.setText(CampaignActivity.txt_score_campaign.getText());
+        ((CampaignActivity)context).set_txt_game_over_score_c_text();
+        //CampaignActivity.txt_game_over_score_c.setText(CampaignActivity.txt_score_campaign.getText());
         ((CampaignActivity)getContext()).findViewById(R.id.txt_score_campaign).setVisibility(INVISIBLE);
         ((CampaignActivity)getContext()).findViewById(R.id.rl_game_over_c).setVisibility(VISIBLE);
         ((CampaignActivity)getContext()).findViewById(R.id.rl_buttons).setVisibility(VISIBLE);
@@ -382,7 +387,8 @@ public class CampaignView extends View {
                             objects.remove(aliens.get(j));
                             bullets.remove(bullets.get(i));
                             aliens.remove(aliens.get(j));
-                            CampaignActivity.txt_score_campaign.setText(getResources().getString(R.string.text_score, score));
+                            ((CampaignActivity)context).set_txt_score_campaign_text(getResources().getString(R.string.text_score, score));
+                            //CampaignActivity.txt_score_campaign.setText(getResources().getString(R.string.text_score, score));
                             break;
                         }
                     }
@@ -643,8 +649,9 @@ public class CampaignView extends View {
     }
 
     public void reset(){
-        CampaignActivity.txt_score_campaign.setText("0");
-        ((CampaignActivity)getContext()).findViewById(R.id.txt_score_campaign).setVisibility(VISIBLE);
+        ((CampaignActivity)context).set_txt_score_campaign_text("0");
+        //CampaignActivity.txt_score_campaign.setText("0");
+        ((CampaignActivity)context).findViewById(R.id.txt_score_campaign).setVisibility(VISIBLE);
         score = 0;
         aliens.clear();
         bullets.clear();
