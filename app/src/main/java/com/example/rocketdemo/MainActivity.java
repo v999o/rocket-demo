@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
     public static TextView txt_score, txt_best_score, txt_game_over_score, txt_choose_gamemode, txt_loading;
     public static RelativeLayout rl_game_over, rl_buttons_s;
     public static Button btn_normal_survival, btn_boss_survival, btn_campaign;
-    public static ImageButton btn_to_menu_s, btn_restart_level_s, btn_pause_s, btn_resume_s;
+    public static ImageButton btn_to_menu_s, btn_restart_level_s, btn_resume_s;
+    public ImageButton btn_pause_s;
     private GameView gv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

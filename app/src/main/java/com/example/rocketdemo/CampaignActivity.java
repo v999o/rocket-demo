@@ -81,6 +81,7 @@ public class CampaignActivity extends AppCompatActivity {
             btn_pause.setVisibility(View.INVISIBLE);
             rl_buttons.setVisibility(View.VISIBLE);
             btn_resume.setVisibility(View.VISIBLE);
+            btn_next_level.setVisibility(View.INVISIBLE);
         });
 
         btn_resume.setOnClickListener(view -> {
@@ -103,7 +104,9 @@ public class CampaignActivity extends AppCompatActivity {
 
         btn_next_level.setOnClickListener(view -> {
             rl_game_over_c.setVisibility(View.INVISIBLE);
+            btn_next_level.setVisibility(View.INVISIBLE);
             rl_buttons.setVisibility(View.INVISIBLE);
+            btn_pause.setVisibility(View.VISIBLE);
             cv.setStart(true);
             cv.reset();
             if (cv.getLevel_number() < 4) {

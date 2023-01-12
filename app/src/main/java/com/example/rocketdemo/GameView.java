@@ -17,6 +17,8 @@ import java.util.Random;
 public class GameView extends View {
 
     private final Bitmaps_boom bitmaps_boom = new Bitmaps_boom(getContext());
+    private final Bitmaps_rocket_boom bitmaps_rocket_boom = new Bitmaps_rocket_boom(getContext());
+
     private Rocket rocket;
     private SurvivalBoss survivalBoss;
     private Bullet_SurvivalBoss bullet_survivalBoss;
@@ -31,6 +33,7 @@ public class GameView extends View {
     private int survival_boss_bullet_delay_next = 50;
     private boolean survival_boss_spawned = false;
     private boolean boss_survival = false;
+    private boolean game_over_showed = false;
     private final Context context;
     private final ArrayList<GameObject> objects = new ArrayList<>();
     private final ArrayList<Alien> aliens = new ArrayList<>();
@@ -50,6 +53,7 @@ public class GameView extends View {
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+
         SharedPreferences sp = context.getSharedPreferences(GAME_SETTINGS, Context.MODE_PRIVATE);
         if(sp != null){
             bestscore = sp.getInt(BEST_SCORE, 0);
@@ -62,8 +66,10 @@ public class GameView extends View {
         handler = new Handler();
         r = () -> {
             if (game_over){
-                show_game_over();
-                handle_rocket_boom(context);
+                if (!game_over_showed) {
+                    show_game_over();
+                }
+                handle_rocket_boom();
             } else {
                 if (play) {
                     handle_rocket();
@@ -88,8 +94,8 @@ public class GameView extends View {
         objects.add(rocket);
     }
 
-    public void create_rocket_boom(Context context){
-        rocket_boom = new Rocket_boom(context, rocket.getX()-27, rocket.getY());
+    public void create_rocket_boom(){
+        rocket_boom = new Rocket_boom(bitmaps_rocket_boom, rocket.getX()-27, rocket.getY());
         objects.add(rocket_boom);
         objects.remove(rocket);
         isRocket_boom_created = true;
@@ -206,10 +212,10 @@ public class GameView extends View {
     }
 
     public void handle_rocket_bullet(Context context){
-        if (rocket_bullet_delay == 0 && (touchLeft || touchRight)){
+        if (rocket_bullet_delay == 0 && (touchLeft || touchRight) && rocket.getX() > 0 && rocket.getX() + rocket.getWidth() < Constants.SCREEN_WIDTH){
             create_rocket_bullet(context);
             rocket_bullet_delay = 20;
-        } else if (touchLeft || touchRight){
+        } else if ((touchLeft || touchRight) && rocket.getX() > 0 && rocket.getX() + rocket.getWidth() < Constants.SCREEN_WIDTH){
             rocket_bullet_delay -= 1;
         }
         for (int i = bullets.size()-1; i >= 0; i--){ //проходим от конца массива к началу чтобы безопасно удалять
@@ -322,9 +328,9 @@ public class GameView extends View {
         }
     }
 
-    public void handle_rocket_boom(Context context) {
+    public void handle_rocket_boom() {
         if (!isRocket_boom_created) {
-            create_rocket_boom(context);
+            create_rocket_boom();
         } else if (rocket_boom.getLife() <= 0) {
             objects.remove(rocket_boom);
         } else {
@@ -341,10 +347,11 @@ public class GameView extends View {
             editor.putInt(BEST_SCORE, bestscore);
             editor.apply();
         }
-        MainActivity.btn_pause_s.setVisibility(INVISIBLE);
+        ((MainActivity)context).findViewById(R.id.btn_pause_s).setVisibility(INVISIBLE);
         MainActivity.txt_best_score.setText(getResources().getString(R.string.bestcore, bestscore));
         MainActivity.txt_score.setVisibility(INVISIBLE);
         MainActivity.rl_game_over.setVisibility(VISIBLE);
+        game_over_showed = true;
     }
 
     public void draw(Canvas canvas){
@@ -399,6 +406,7 @@ public class GameView extends View {
         bullets_survivalBoss.clear();
         objects.clear();
         game_over = false;
+        game_over_showed = false;
         boss_survival = false;
         survival_boss_spawned = false;
         isRocket_boom_created = false;

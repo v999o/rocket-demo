@@ -16,7 +16,7 @@ public class BitmapsAnimation {
     }
 
     public Bitmap get(int life) {
-        int idx = bitmaps.length - ((life / 5) % bitmaps.length+1);
+        int idx = (bitmaps.length-1) - ((life / 5) % (bitmaps.length+1));
         return bitmaps[idx];
     }
 }

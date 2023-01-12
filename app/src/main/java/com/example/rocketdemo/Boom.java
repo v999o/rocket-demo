@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 
 public class Boom extends GameObject{
 
-    private int life = 25;
+    private int life = 24;
     private final Bitmaps_boom bitmaps_boom;
 
     public Boom(Bitmaps_boom bitmaps_boom, int x, int y) {

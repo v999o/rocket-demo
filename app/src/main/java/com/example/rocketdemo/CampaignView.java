@@ -1,7 +1,7 @@
 package com.example.rocketdemo;
 
 import android.content.Context;
-//import android.content.SharedPreferences;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class CampaignView extends View {
 
     private final Bitmaps_boom bitmaps_boom = new Bitmaps_boom(getContext());
+    private final Bitmaps_rocket_boom bitmaps_rocket_boom = new Bitmaps_rocket_boom(getContext());
     private final Bitmaps_triangleBoss bitmaps_triangleBoss = new Bitmaps_triangleBoss(getContext());
     private final Bitmaps_ufoBoss bitmaps_ufoBoss = new Bitmaps_ufoBoss(getContext());
     private final Bitmaps_bugBoss bitmaps_bugBoss = new Bitmaps_bugBoss(getContext());
@@ -45,8 +46,10 @@ public class CampaignView extends View {
     private boolean touchRight = false;
     private boolean touchLeft = false;
     private boolean game_over = false;
+    private boolean game_over_showed = false;
     private int rocket_bullet_delay = 1;
     private int score = 0;
+    private int bestscore1, bestscore2, bestscore3, bestscore4;
     private int current_y = 0;
     private int level_number = 0;
     private final ArrayList<GameObject> objects = new ArrayList<>();
@@ -60,13 +63,29 @@ public class CampaignView extends View {
     private final android.os.Handler handler;
     private final Runnable r;
 
+    private static final String GAME_SETTINGS = "game-settings";
+    private static final String BEST_SCORE1 = "best-score1";
+    private static final String BEST_SCORE2 = "best-score2";
+    private static final String BEST_SCORE3 = "best-score3";
+    private static final String BEST_SCORE4 = "best-score4";
+
     public CampaignView(Context context, @Nullable AttributeSet attrs){
         super(context, attrs);
+
+        SharedPreferences sp = context.getSharedPreferences(GAME_SETTINGS, Context.MODE_PRIVATE);
+        if(sp != null){
+            bestscore1 = sp.getInt(BEST_SCORE1, 0);
+            bestscore2 = sp.getInt(BEST_SCORE2, 0);
+            bestscore3 = sp.getInt(BEST_SCORE3, 0);
+            bestscore4 = sp.getInt(BEST_SCORE4, 0);
+        }
         handler = new Handler();
         r = () -> {
             if (game_over){
-                show_game_over();
-                handle_rocket_boom(context);
+                if (!game_over_showed){
+                    show_game_over();
+                }
+                handle_rocket_boom();
             } else if (isLevelComplete){
                 show_level_complete();
             } else {
@@ -140,32 +159,66 @@ public class CampaignView extends View {
         handle_booms();
     }
 
-    public void show_game_over(){
-        CampaignActivity.txt_game_over_score_c.setText(CampaignActivity.txt_score_campaign.getText());
-        /* if (bestscore < score) {
+    public void save_bestscore(int bestscore, String BEST_SCORE){
+        if (bestscore < score){
             bestscore = score;
-            SharedPreferences sp = context.getSharedPreferences(GAME_SETTINGS, Context.MODE_PRIVATE);
+            SharedPreferences sp = getContext().getSharedPreferences(GAME_SETTINGS, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
             editor.putInt(BEST_SCORE, bestscore);
             editor.apply();
-        }*/
-        //MainActivity.txt_best_score.setText("best: " + bestscore);
+        }
+        CampaignActivity.txt_best_score_c.setText(getResources().getString(R.string.bestcore, bestscore));
+    }
+
+    public void show_game_over(){
+        CampaignActivity.txt_game_over_score_c.setText(CampaignActivity.txt_score_campaign.getText());
+        switch (level_number){
+            case 1:
+                save_bestscore(bestscore1, BEST_SCORE1);
+                break;
+            case 2:
+                save_bestscore(bestscore2, BEST_SCORE2);
+                break;
+            case 3:
+                save_bestscore(bestscore3, BEST_SCORE3);
+                break;
+            case 4:
+                save_bestscore(bestscore4, BEST_SCORE4);
+                break;
+        }
         CampaignActivity.txt_score_campaign.setVisibility(INVISIBLE);
         CampaignActivity.rl_game_over_c.setVisibility(VISIBLE);
         CampaignActivity.rl_buttons.setVisibility(VISIBLE);
         CampaignActivity.txt_level_complete.setVisibility(INVISIBLE);
         CampaignActivity.txt_game_over_c.setVisibility(VISIBLE);
         CampaignActivity.btn_pause.setVisibility(INVISIBLE);
+        game_over_showed = true;
     }
 
     public void show_level_complete(){
+        switch (level_number){
+            case 1:
+                save_bestscore(bestscore1, BEST_SCORE1);
+                break;
+            case 2:
+                save_bestscore(bestscore2, BEST_SCORE2);
+                break;
+            case 3:
+                save_bestscore(bestscore3, BEST_SCORE3);
+                break;
+            case 4:
+                save_bestscore(bestscore4, BEST_SCORE4);
+                break;
+        }
         CampaignActivity.txt_game_over_score_c.setText(CampaignActivity.txt_score_campaign.getText());
         CampaignActivity.txt_score_campaign.setVisibility(INVISIBLE);
         CampaignActivity.rl_game_over_c.setVisibility(VISIBLE);
         CampaignActivity.rl_buttons.setVisibility(VISIBLE);
         CampaignActivity.txt_level_complete.setVisibility(VISIBLE);
         CampaignActivity.txt_game_over_c.setVisibility(INVISIBLE);
-        CampaignActivity.btn_next_level.setVisibility(VISIBLE);
+        if (level_number < 4) {
+            CampaignActivity.btn_next_level.setVisibility(VISIBLE);
+        }
         CampaignActivity.btn_pause.setVisibility(INVISIBLE);
     }
 
@@ -210,8 +263,8 @@ public class CampaignView extends View {
         booms.add(boom);
     }
 
-    public void create_rocket_boom(Context context){
-        rocket_boom = new Rocket_boom(context, rocket.getX()-27, rocket.getY());
+    public void create_rocket_boom(){
+        rocket_boom = new Rocket_boom(bitmaps_rocket_boom, rocket.getX()-27, rocket.getY());
         objects.add(rocket_boom);
         objects.remove(rocket);
         isRocket_boom_created = true;
@@ -292,10 +345,10 @@ public class CampaignView extends View {
     }
 
     public void handle_rocket_bullet(Context context, Boss boss) {
-        if (rocket_bullet_delay == 0 && (touchLeft || touchRight)) {
+        if (rocket_bullet_delay == 0 && (touchLeft || touchRight) && rocket.getX() > 0 && rocket.getX() + rocket.getWidth() < Constants.SCREEN_WIDTH) {
             create_rocket_bullet(context);
             rocket_bullet_delay = 20;
-        } else if (touchLeft || touchRight) {
+        } else if ((touchLeft || touchRight) && rocket.getX() > 0 && rocket.getX() + rocket.getWidth() < Constants.SCREEN_WIDTH) {
             rocket_bullet_delay -= 1;
         }
         for (int i = bullets.size() - 1; i >= 0; i--) { //проходим от конца массива к началу чтобы безопасно удалять
@@ -493,9 +546,9 @@ public class CampaignView extends View {
         }
     }
 
-    public void handle_rocket_boom(Context context) {
+    public void handle_rocket_boom() {
         if (!isRocket_boom_created) {
-            create_rocket_boom(context);
+            create_rocket_boom();
         } else if (rocket_boom.getLife() <= 0) {
             objects.remove(rocket_boom);
         } else {
@@ -601,6 +654,7 @@ public class CampaignView extends View {
         meteorBosses.clear();
         boom_meteorBosses.clear();
         game_over = false;
+        game_over_showed = false;
         isLevelComplete = false;
         isRocketSpawned = false;
         isRocket_boom_created = false;
@@ -609,5 +663,12 @@ public class CampaignView extends View {
         isAllMeteorBossesDestroyed = false;
         rocket_bullet_delay = 1;
         current_y = 0;
+        SharedPreferences sp = getContext().getSharedPreferences(GAME_SETTINGS, Context.MODE_PRIVATE);
+        if(sp != null){
+            bestscore1 = sp.getInt(BEST_SCORE1, 0);
+            bestscore2 = sp.getInt(BEST_SCORE2, 0);
+            bestscore3 = sp.getInt(BEST_SCORE3, 0);
+            bestscore4 = sp.getInt(BEST_SCORE4, 0);
+        }
     }
 }
