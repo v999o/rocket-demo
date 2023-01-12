@@ -90,7 +90,7 @@ public class GameView extends View {
     }
 
     public void create_rocket(Context context){
-        rocket = new Rocket(context, Constants.SCREEN_WIDTH/2-this.getWidth()/2, Constants.SCREEN_HEIGHT-100);
+        rocket = new Rocket(context, Constants.SCREEN_WIDTH/2-34/2, Constants.SCREEN_HEIGHT-100);
         objects.add(rocket);
     }
 
