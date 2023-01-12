@@ -349,8 +349,8 @@ public class GameView extends View {
         }
         ((MainActivity)context).findViewById(R.id.btn_pause_s).setVisibility(INVISIBLE);
         MainActivity.txt_best_score.setText(getResources().getString(R.string.bestcore, bestscore));
-        MainActivity.txt_score.setVisibility(INVISIBLE);
-        MainActivity.rl_game_over.setVisibility(VISIBLE);
+        ((MainActivity)context).findViewById(R.id.txt_score).setVisibility(INVISIBLE);
+        ((MainActivity)context).findViewById(R.id.rl_game_over).setVisibility(VISIBLE);
         game_over_showed = true;
     }
 

@@ -5,7 +5,6 @@ public class Boss extends GameObject {
     private boolean damage = false;
     private int damage_life = 5;
     private int hp;
-    private final int default_hp;
     private boolean switcher = true;
     private int boss_bullet_delay;
     private final int boss_bullet_delay_next;
@@ -15,7 +14,6 @@ public class Boss extends GameObject {
         super(x, y, w, h);
         this.stop_height = stop_height;
         this.hp = hp;
-        this.default_hp = hp;
         this.boss_bullet_delay_next = boss_bullet_delay_next;
         this.boss_bullet_delay = boss_bullet_delay_next;
     }
@@ -55,20 +53,12 @@ public class Boss extends GameObject {
         this.damage = damage;
     }
 
-    public int getDamage_life() {
-        return damage_life;
-    }
-
     public int getHp() {
         return hp;
     }
 
     public void setHp(int hp) {
         this.hp = hp;
-    }
-
-    public int getDefault_hp() {
-        return default_hp;
     }
 
     public boolean isSwitcher() {

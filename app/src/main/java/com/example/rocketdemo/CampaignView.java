@@ -186,12 +186,12 @@ public class CampaignView extends View {
                 save_bestscore(bestscore4, BEST_SCORE4);
                 break;
         }
-        CampaignActivity.txt_score_campaign.setVisibility(INVISIBLE);
-        CampaignActivity.rl_game_over_c.setVisibility(VISIBLE);
-        CampaignActivity.rl_buttons.setVisibility(VISIBLE);
-        CampaignActivity.txt_level_complete.setVisibility(INVISIBLE);
-        CampaignActivity.txt_game_over_c.setVisibility(VISIBLE);
-        CampaignActivity.btn_pause.setVisibility(INVISIBLE);
+        ((CampaignActivity)getContext()).findViewById(R.id.txt_score_campaign).setVisibility(INVISIBLE);
+        ((CampaignActivity)getContext()).findViewById(R.id.rl_game_over_c).setVisibility(VISIBLE);
+        ((CampaignActivity)getContext()).findViewById(R.id.rl_buttons).setVisibility(VISIBLE);
+        ((CampaignActivity)getContext()).findViewById(R.id.txt_level_complete).setVisibility(INVISIBLE);
+        ((CampaignActivity)getContext()).findViewById(R.id.txt_game_over_c).setVisibility(VISIBLE);
+        ((CampaignActivity)getContext()).findViewById(R.id.btn_pause).setVisibility(INVISIBLE);
         game_over_showed = true;
     }
 
@@ -211,15 +211,15 @@ public class CampaignView extends View {
                 break;
         }
         CampaignActivity.txt_game_over_score_c.setText(CampaignActivity.txt_score_campaign.getText());
-        CampaignActivity.txt_score_campaign.setVisibility(INVISIBLE);
-        CampaignActivity.rl_game_over_c.setVisibility(VISIBLE);
-        CampaignActivity.rl_buttons.setVisibility(VISIBLE);
-        CampaignActivity.txt_level_complete.setVisibility(VISIBLE);
-        CampaignActivity.txt_game_over_c.setVisibility(INVISIBLE);
+        ((CampaignActivity)getContext()).findViewById(R.id.txt_score_campaign).setVisibility(INVISIBLE);
+        ((CampaignActivity)getContext()).findViewById(R.id.rl_game_over_c).setVisibility(VISIBLE);
+        ((CampaignActivity)getContext()).findViewById(R.id.rl_buttons).setVisibility(VISIBLE);
+        ((CampaignActivity)getContext()).findViewById(R.id.txt_level_complete).setVisibility(VISIBLE);
+        ((CampaignActivity)getContext()).findViewById(R.id.txt_game_over_c).setVisibility(INVISIBLE);
         if (level_number < 4) {
-            CampaignActivity.btn_next_level.setVisibility(VISIBLE);
+            ((CampaignActivity)getContext()).findViewById(R.id.btn_next_level).setVisibility(VISIBLE);
         }
-        CampaignActivity.btn_pause.setVisibility(INVISIBLE);
+        ((CampaignActivity)getContext()).findViewById(R.id.btn_pause).setVisibility(INVISIBLE);
     }
 
     public void create_aliens_triangle(Context context, int i){
@@ -644,7 +644,7 @@ public class CampaignView extends View {
 
     public void reset(){
         CampaignActivity.txt_score_campaign.setText("0");
-        CampaignActivity.txt_score_campaign.setVisibility(VISIBLE);
+        ((CampaignActivity)getContext()).findViewById(R.id.txt_score_campaign).setVisibility(VISIBLE);
         score = 0;
         aliens.clear();
         bullets.clear();

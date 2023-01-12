@@ -12,10 +12,11 @@ import android.widget.TextView;
 
 public class CampaignActivity extends AppCompatActivity {
 
-    public static TextView txt_score_campaign, txt_game_over_score_c, txt_best_score_c, txt_level_complete, txt_game_over_c;
-    public static Button btn_lvl1, btn_lvl2, btn_lvl3, btn_lvl4;
-    public static ImageButton btn_to_menu, btn_restart_level, btn_next_level, btn_back, btn_pause, btn_resume;
-    public static RelativeLayout rl_game_over_c, rl_buttons;
+    public TextView txt_level_complete, txt_game_over_c;
+    public static TextView txt_game_over_score_c, txt_best_score_c, txt_score_campaign;
+    public Button btn_lvl1, btn_lvl2, btn_lvl3, btn_lvl4;
+    public ImageButton btn_to_menu, btn_restart_level, btn_next_level, btn_back, btn_pause, btn_resume;
+    public RelativeLayout rl_game_over_c, rl_buttons;
     private CampaignView cv;
 
     @Override
