@@ -241,8 +241,8 @@ public class GameView extends View {
                             objects.remove(aliens.get(j));
                             bullets.remove(bullets.get(i));
                             aliens.remove(aliens.get(j));
-                            //MainActivity.txt_score.setText("" + score);
-                            MainActivity.txt_score.setText(getResources().getString(R.string.text_score, score));
+                            ((MainActivity)getContext()).set_txt_score_text(getResources().getString(R.string.text_score, score));
+                            //MainActivity.txt_score.setText(getResources().getString(R.string.text_score, score));
                             break;
                         }
                     }
@@ -259,7 +259,8 @@ public class GameView extends View {
                 survival_boss_spawned = false;
                 isSurvival_boss_destroyed = true;
                 score += 20;
-                MainActivity.txt_score.setText(getResources().getString(R.string.text_score, score));
+                ((MainActivity)getContext()).set_txt_score_text(getResources().getString(R.string.text_score, score));
+                //MainActivity.txt_score.setText(getResources().getString(R.string.text_score, score));
                 score_for_boss += 50;
                 default_boss_hp += 1;
                 survival_boss_bullet_delay_next -= 1;
@@ -339,7 +340,8 @@ public class GameView extends View {
     }
 
     public void show_game_over(){
-        MainActivity.txt_game_over_score.setText(MainActivity.txt_score.getText());
+        ((MainActivity)context).set_txt_game_over_score_text(((MainActivity)context).get_txt_score_text().toString());
+        //MainActivity.txt_game_over_score.setText(((MainActivity)getContext()).get_txt_score_text());
         if (bestscore < score) {
             bestscore = score;
             SharedPreferences sp = context.getSharedPreferences(GAME_SETTINGS, Context.MODE_PRIVATE);
@@ -348,7 +350,8 @@ public class GameView extends View {
             editor.apply();
         }
         ((MainActivity)context).findViewById(R.id.btn_pause_s).setVisibility(INVISIBLE);
-        MainActivity.txt_best_score.setText(getResources().getString(R.string.bestcore, bestscore));
+        ((MainActivity)context).set_txt_best_score_text(getResources().getString(R.string.bestcore, bestscore));
+        //MainActivity.txt_best_score.setText(getResources().getString(R.string.bestcore, bestscore));
         ((MainActivity)context).findViewById(R.id.txt_score).setVisibility(INVISIBLE);
         ((MainActivity)context).findViewById(R.id.rl_game_over).setVisibility(VISIBLE);
         game_over_showed = true;
@@ -396,7 +399,8 @@ public class GameView extends View {
     }
 
     public void reset(Context context) {
-        MainActivity.txt_score.setText("0");
+        ((MainActivity)getContext()).set_txt_score_text("0");
+        //MainActivity.txt_score.setText("0");
         score = 0;
         score_for_boss = 50;
         default_boss_hp = 5;

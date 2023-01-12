@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public TextView txt_choose_gamemode;
-    public static TextView txt_score, txt_best_score, txt_game_over_score, txt_loading;
+    public static TextView txt_loading;
+    public TextView txt_best_score, txt_game_over_score, txt_choose_gamemode, txt_score;
     public RelativeLayout rl_game_over, rl_buttons_s;
     public Button btn_normal_survival, btn_boss_survival, btn_campaign;
     public ImageButton btn_to_menu_s, btn_restart_level_s, btn_resume_s;
@@ -122,5 +122,25 @@ public class MainActivity extends AppCompatActivity {
         Context context = rl_game_over.getContext();
         gv.setPlay(false);
         gv.reset(context);
+    }
+
+    public void set_txt_score_text(String string){
+        txt_score.setText(string);
+    }
+
+    public CharSequence get_txt_score_text(){
+        return txt_score.getText();
+    }
+
+    public void set_txt_game_over_score_text(String string){
+        txt_game_over_score.setText(string);
+    }
+
+    public void set_txt_best_score_text(String string){
+        txt_best_score.setText(string);
+    }
+
+    public void hide_txt_loading(){
+        txt_loading.setVisibility(View.INVISIBLE);
     }
 }
